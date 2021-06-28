@@ -173,8 +173,17 @@ eval(strcat("subWeights           = mintsDefinitions.subWeights_",string(nodeIDs
 
 %% Cropping GPS Coordinates
 utdMints = gpsCropUTD(mintsDataUTD,32.992179, -96.757777,0.0015,0.0015);
+
+% Applying Corrections
 if nodeIDs{nodeIndex}.pmStack=="A"
    utdMints(utdMints.OPCN2_pm1>1000,:) = [] ;
+end    
+if nodeIDs{nodeIndex}.pmStack=="B"
+   utdMints(utdMints.OPCN3_pm2_5>1000,:) = [] ;
+end    
+
+if nodeIndex==20
+   utdMints(utdMints.dateTime<datetime(2020,10,21,'timeZone','utc'),:) = [] ;
 end    
 
 
