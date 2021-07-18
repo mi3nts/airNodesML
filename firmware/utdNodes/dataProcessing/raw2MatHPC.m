@@ -26,7 +26,7 @@ function [] = row2MatHPC(nodeIndex)
 display(newline)
 display("---------------------MINTS---------------------")
 
-addpath("../../YAMLMatlab_0.4.3")
+addpath("../../../YAMLMatlab_0.4.3")
 addpath("../../../functions/")
 mintsDefinitions  = ReadYaml('../../mintsDefinitions2021.yaml')
 
@@ -43,7 +43,7 @@ display("Raw Data Located @: "+ dataFolder)
 display("Raw DotMat Data Located @ :"+ rawMatsFolder)
 display(newline)
 
-% syncFromCloudUTDNodes(nodeIDs,dataFolder)
+%syncFromCloudUTDNodes(nodeIDs,dataFolder)
 
 nodeID         = nodeIDs{nodeIndex}.nodeID;
 

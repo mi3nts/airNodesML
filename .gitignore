@@ -1,6 +1,8 @@
 # Prerequisites
 *.d
 *.yaml
+*.out
+*.err
 
 
 # Compiled Object files
