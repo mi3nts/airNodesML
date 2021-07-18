@@ -1,0 +1,16 @@
+function [] = printCSVTTAll(calibrated,folder,nodeID,stringIn)
+%PRINTCSVDAILY Summary of this function goes here
+                    
+
+    outCalibratedFileName    = strcat(folder,"/",nodeID,"/",...
+                                                     "MINTS_",...
+                                                     nodeID,...
+                                                     "_",stringIn,...
+                                                     ".csv"...
+                                                 );  
+                                             
+
+    folderCheck(outCalibratedFileName);
+    writetimetable(calibrated,outCalibratedFileName);
+end
+
