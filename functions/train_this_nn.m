@@ -9,7 +9,7 @@ t = Out_Train';
 % 'trainlm' is usually fastest.
 % 'trainbr' takes longer but may be better for challenging problems.
 % 'trainscg' uses less memory. Suitable in low memory situations.
-trainFcn = 'trainbr';  % Bayesian Regularization backpropagation.
+trainFcn = 'trainlm';  % Bayesian Regularization backpropagation.
 
 % Create a Fitting Network
 net = fitnet(hiddenLayerSize,trainFcn);
@@ -18,7 +18,8 @@ net.trainParam.epochs = nepochs;
 % Choose Input and Output Pre/Post-Processing Functions
 % For a list of all processing functions type: help nnprocess
 net.input.processFcns = {'removeconstantrows','mapminmax'};
-net.output.processFcns = {'removeconstantrows','mapminmax'};
+net.output.processFcns = {'removeconstantrows','mapminmax',};
+% net = struct(net);
 
 % Setup Division of Data for Training, Validation, Testing
 % For a list of all data division functions type: help nndivision
@@ -34,8 +35,10 @@ net.performFcn = 'mse';  % Mean Squared Error
 
 % Learning rate
 net.trainParam.lr = lr;
-net.layers{1}.transferFcn=char(tf);
 
+net.layers{1}.transferFcn=char(tf);
+net.layers{2}.transferFcn = 'logsig'
+% net.layers{1}.transferFcn = 'poslin';
 % Choose Plot Functions
 % For a list of all plot functions type: help nnplot
 net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
@@ -43,3 +46,5 @@ net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
 
 % Train the Network
 [net,tr] = train(net,x,t);
+
+end

@@ -1,4 +1,3 @@
-
 % # ***************************************************************************
 % #   ---------------------------------
 % #   Written by: Lakitha Omal Harindha Wijeratne
@@ -22,8 +21,8 @@
 % #   Raw to Mat - Concantinates all .csv files from UTD nodes and creates 
 % #   a single .mat file for each UTD Node    
  
-for n= 1:20 
+for n= 2:20 
     
-    utdNodesONN(n)
+    utdNodesV2(n)
 
 end 

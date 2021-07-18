@@ -16,8 +16,8 @@ vars = [
 
 %--------------------------------------------------------------------------
 % Optimize
-MaxObjectiveEvaluations=200;
-% MaxObjectiveEvaluations=30;
+% MaxObjectiveEvaluations=200;
+MaxObjectiveEvaluations=30;
 minfn = @(T)kfoldLoss(In', Out', cv, T.hiddenLayerSize, T.lr);
 results = bayesopt( ...
     minfn, ...
@@ -35,7 +35,7 @@ T = bestPoint(results)
 % Train final model on full training set using the best hyperparameters
 hiddenLayerSize=T.hiddenLayerSize;
 lr=T.lr;
-tf='tansig';
+tf='logsig';
 
 
 % Train the Network
