@@ -88,9 +88,7 @@ function  valid = drawContourPlot(calibrated,nodeID,xLabel,yLabel,titleIn,givenD
             Fig_name = strcat(outFigNamePre,'.png');
             saveas(figure_1,char(Fig_name));
 % 
-%             Fig_name = strcat(outFigNamePre,'.fig')
-%             saveas(figure_1,char(Fig_name));
-          
+
             valid =  true ;
     end   
         

@@ -48,23 +48,16 @@ display(newline)
 nodeID         = nodeIDs{nodeIndex}.nodeID;
 
 %% Syncing Process
-APDS9002   =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'APDS9002',timeSpan);
 AS7262     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'AS7262',timeSpan);
 BME280     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'BME280',timeSpan);
-GL001      =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'GL001',timeSpan);
 GPSGPGGA2  =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'GPSGPGGA2',timeSpan);
-GUV001     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'GUV001',timeSpan);
-HM3301     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'HM3301',timeSpan);
 LIBRAD     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'LIBRAD',timeSpan);
 MGS001     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'MGS001',timeSpan);
 OPCN2      =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'OPCN2',timeSpan);
 OPCN3      =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'OPCN3',timeSpan);
 PPD42NSDuo =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'PPD42NSDuo',timeSpan);
 SCD30      =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'SCD30',timeSpan);
-SI114X     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'SI114X',timeSpan);
 SKYCAM2    =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'SKYCAM_002',timeSpan);
-TB108L     =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'TB108L',timeSpan);
-TMG3993    =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'TMG3993',timeSpan);
 TSL2591    =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'TSL2591',timeSpan);
 VEML6075   =  getSyncedDataV2(dataFolder,'/*/*/*/*/*/MINTS_',nodeID,'VEML6075',timeSpan);
 
