@@ -31,7 +31,7 @@ display("---------------------MINTS---------------------")
 
 addpath("../../../YAMLMatlab_0.4.3")
 addpath("../../../functions/")
-mintsDefinitions  = ReadYaml('mintsDefinitionsV2.yaml')
+mintsDefinitions  = ReadYaml('../mintsDefinitionsV2.yaml')
 
 nodeIDs        = mintsDefinitions.nodeIDs;
 timeSpan       = seconds(mintsDefinitions.timeSpan);

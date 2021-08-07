@@ -59,9 +59,9 @@ airmarID            = mintsDefinitions.airmarID;
 instruments         = mintsDefinitions.instruments;
 units               = mintsDefinitions.units;
 poolWorkers         = mintsDefinitions.poolWorkers;
-
-,...
-            minLayers,maxLayers,MaxEvaluations);
+  minLayers= mintsDefinitions.minLayers;
+  maxLayers= mintsDefinitions.maxLayers;
+  MaxEvaluations= mintsDefinitions.MaxEvaluations;
 
 targets      = mintsDefinitions.targets;
 targetLabels = mintsDefinitions.targetLabels;
@@ -167,22 +167,6 @@ end
 
 %% CN Node Patches 
 mintsDataUTD = nodeFixes(nodeID,mintsDataUTD,timeSpan,rawMatsFolder);
-% if nodeID == "001e06318c91"
-%     mintsDataUTD(mintsDataUTD.dateTime<...
-%                             datetime(2021,03,04,'timezone','utc'),:) = [];
-%     mintsDataUTDKept = mintsDataUTD;    
-%     load(strcat(rawMatsFolder,'/UTDNodes/Mints_UTD_Node_001e0637371e.mat'));
-%     mintsDataUTD(mintsDataUTD.dateTime>...
-%                             datetime(2021,03,02,'timezone','utc'),:) = [];
-%     mintsDataUTD = synchronize(mintsDataUTD,mintsDataUTDKept,'regular',...
-%                                 'mean','TimeStep',timeSpan);
-%                         
-% else if nodeID  == "001e0637371e" 
-%         
-%       mintsDataUTD(mintsDataUTD.dateTime<...
-%                             datetime(2021,03,04,'timezone','utc'),:) = [];    
-%        
-% end     
 
 %% Defining how may stacks to use
 % climate stack and PM stack
@@ -335,7 +319,8 @@ params =  calibrateTargetUTDV2(...
     limitsLow,limitsHigh,...
     plotsFolder,dailyString,versionStr,...
     graphTitle1,modelsMatsFolder,...
-    globalCSVLabel,trainingMatsFolder);
+    globalCSVLabel,trainingMatsFolder,...
+    minLayers,maxLayers,MaxEvaluations);
 
 % Here We need to decide which parametors are used, either real climate
 % values or calib climate values

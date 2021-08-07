@@ -47,7 +47,7 @@ display(datestr(datetime('now')))
 addpath("../../../functions/")
 
 addpath("../../../YAMLMatlab_0.4.3")
-mintsDefinitions  = ReadYaml('mintsDefinitionsV2.yaml')
+mintsDefinitions  = ReadYaml('../mintsDefinitionsV2.yaml')
 
 dataFolder          = mintsDefinitions.dataFolder;
 nodeIDs             = mintsDefinitions.nodeIDs;
@@ -166,23 +166,7 @@ else
 end
 
 %% CN Node Patches 
-mintsDataUTD = nodeFixes(nodeID,mintsDataUTD,timeSpan,rawMatsFolder);
-% if nodeID == "001e06318c91"
-%     mintsDataUTD(mintsDataUTD.dateTime<...
-%                             datetime(2021,03,04,'timezone','utc'),:) = [];
-%     mintsDataUTDKept = mintsDataUTD;    
-%     load(strcat(rawMatsFolder,'/UTDNodes/Mints_UTD_Node_001e0637371e.mat'));
-%     mintsDataUTD(mintsDataUTD.dateTime>...
-%                             datetime(2021,03,02,'timezone','utc'),:) = [];
-%     mintsDataUTD = synchronize(mintsDataUTD,mintsDataUTDKept,'regular',...
-%                                 'mean','TimeStep',timeSpan);
-%                         
-% else if nodeID  == "001e0637371e" 
-%         
-%       mintsDataUTD(mintsDataUTD.dateTime<...
-%                             datetime(2021,03,04,'timezone','utc'),:) = [];    
-%        
-% end     
+mintsDataUTD = nodeFixes(nodeID,mintsDataUTD,rawMatsFolder);
 
 %% Defining how may stacks to use
 % climate stack and PM stack
@@ -228,9 +212,8 @@ save(fileNameStr,...
     'climateWithTargets');
 
 %% Applying Bounds For Climate Data 
+
 climateWithTargets = checkBounds(climateWithTargets,nodeID,versionStr,modelsMatsFolder,"climateBounds");
-
-
 
 % This could depend on the implimentation
 trainingPM    = correctionsUTDV2(utdMints(:,pmInputs));

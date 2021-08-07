@@ -1,22 +1,22 @@
 function [bestModels,bestModelsLabels,climateParamsNow]  = readResultsNowV2(fileName,nodeID,mintsTargets,modelsFolder)
 
 %% Set up the Import Options and import the data
-opts = delimitedTextImportOptions("NumVariables", 14);
+opts = delimitedTextImportOptions("NumVariables", 17);
 
 % Specify range and delimiter
 opts.DataLines = [2, Inf];
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["rmseTrain", "rSquaredTrain", "rmseValid", "rSquaredValid", "rmse", "rSquared", "pValid", "nodeID", "target", "binsPerColumn", "numberPerBin", "trainRows", "validRows", "versionStrMdl"];
-opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "categorical", "categorical", "double", "double", "double", "double", "categorical"];
+opts.VariableNames = ["rmseTrain", "rSquaredTrain", "rmseValid", "rSquaredValid", "rmse", "rSquared", "pValid", "nodeID", "target", "binsPerColumn", "numberPerBin", "minLayers", "maxLayers", "MaxEvaluations", "trainRows", "validRows", "versionStr"];
+opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "categorical", "categorical", "double", "double", "double", "double", "double", "double", "double", "categorical"];
 
 % Specify file level properties
 opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Specify variable properties
-opts = setvaropts(opts, ["nodeID", "target", "versionStrMdl"], "EmptyFieldRule", "auto");
+opts = setvaropts(opts, ["nodeID", "target", "versionStr"], "EmptyFieldRule", "auto");
 
 % Import the data
 results = readtable(fileName, opts);
