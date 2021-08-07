@@ -29,9 +29,9 @@ close all
 display(newline)
 display("---------------------MINTS---------------------")
 
-addpath("../../YAMLMatlab_0.4.3")
+addpath("../../../YAMLMatlab_0.4.3")
 addpath("../../../functions/")
-mintsDefinitions  = ReadYaml('../../mintsDefinitions2021.yaml')
+mintsDefinitions  = ReadYaml('mintsDefinitionsV2.yaml')
 
 nodeIDs        = mintsDefinitions.nodeIDs;
 timeSpan       = seconds(mintsDefinitions.timeSpan);
@@ -46,10 +46,10 @@ display("Raw Data Located @: "+ dataFolder)
 display("Raw DotMat Data Located @ :"+ rawMatsFolder)
 display(newline)
 
-syncFromCloudUTDNodes(nodeIDs,dataFolder)
+% syncFromCloudUTDNodes(nodeIDs,dataFolder)
 
 
-for nodeIndex = 1: length(nodeIDs)
+for nodeIndex = 27: length(nodeIDs)
     
     nodeID         = nodeIDs{nodeIndex}.nodeID;
     

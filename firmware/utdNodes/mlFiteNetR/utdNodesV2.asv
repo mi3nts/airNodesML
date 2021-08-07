@@ -59,9 +59,9 @@ airmarID            = mintsDefinitions.airmarID;
 instruments         = mintsDefinitions.instruments;
 units               = mintsDefinitions.units;
 poolWorkers         = mintsDefinitions.poolWorkers;
-  minLayers= mintsDefinitions.minLayers;
-  maxLayers= mintsDefinitions.maxLayers;
-  MaxEvaluations= mintsDefinitions.MaxEvaluations;
+
+,...
+            minLayers,maxLayers,MaxEvaluations);
 
 targets      = mintsDefinitions.targets;
 targetLabels = mintsDefinitions.targetLabels;
@@ -335,8 +335,7 @@ params =  calibrateTargetUTDV2(...
     limitsLow,limitsHigh,...
     plotsFolder,dailyString,versionStr,...
     graphTitle1,modelsMatsFolder,...
-    globalCSVLabel,trainingMatsFolder,...
-    minLayers,maxLayers,MaxEvaluations);
+    globalCSVLabel,trainingMatsFolder);
 
 % Here We need to decide which parametors are used, either real climate
 % values or calib climate values

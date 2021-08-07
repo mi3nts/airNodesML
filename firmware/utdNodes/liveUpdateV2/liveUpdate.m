@@ -99,6 +99,8 @@ display("Loading Best Models")
 display("Climate Bounding")
 
 % Probably and if Statement Goes here
+inCorrected = checkBounds(inCorrected,nodeID,"LiveUpdate",modelsFolder,"liveUpdate")
+
 inCorrected = boundCorrections(inCorrected,climateParamsNow);
 
 

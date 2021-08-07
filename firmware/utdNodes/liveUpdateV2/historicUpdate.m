@@ -129,8 +129,6 @@ inCorrected.pressureOut    = 10.^(inCorrected.pressureCalib);
 inCorrected.humidityOut    = inCorrected.humidityCalib;
 inCorrected.dewPointOut    = inCorrected.dewPoint_predicted;
 
-
-
 preFigName  =  updateFolder+"/"+nodeID+"/Mints_"+nodeID;
 
 %% Climate Graphs 

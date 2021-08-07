@@ -1,7 +1,7 @@
-function Mdl = fitRNetOptimized(In,Out)
+function Mdl = fitRNetOptimized(In,Out,minLayers,maxLayers,MaxEvaluations)
 
-%--------------------------------------------------------------------------
-nepochs=250;
+% %--------------------------------------------------------------------------
+% nepochs=250;
 
 %--------------------------------------------------------------------------
 % Define a train/validation split to use inside the objective function
@@ -9,15 +9,17 @@ cv = cvpartition(numel(Out), 'Holdout', 1/3);
 
 %--------------------------------------------------------------------------
 % Define hyperparameters to optimize
+%% Change when running on Europa
 vars = [
-        optimizableVariable('hiddenLayer1', [5,100], 'Type', 'integer');
-        optimizableVariable('hiddenLayer2', [5,100], 'Type', 'integer');
+        optimizableVariable('hiddenLayer1', [minLayers,maxLayers], 'Type', 'integer');
+        optimizableVariable('hiddenLayer2', [minLayers,maxLayers], 'Type', 'integer');
         ];
 
 %--------------------------------------------------------------------------
-% Optimize
+
+%% Change when running on Europa
 %MaxObjectiveEvaluations=200;
-MaxObjectiveEvaluations=30;
+MaxObjectiveEvaluations=MaxEvaluations;
 minfn = @(T)kfoldLoss(In', Out', cv, T.hiddenLayer1, ...
                             T.hiddenLayer2);
 results = bayesopt( ...
@@ -26,8 +28,9 @@ results = bayesopt( ...
     'MaxObjectiveEvaluations',MaxObjectiveEvaluations, ...
     'UseParallel',true, ...
     'IsObjectiveDeterministic', false, ...
-    'AcquisitionFunctionName', 'expected-improvement-plus' ...
-    );
+    'AcquisitionFunctionName', 'expected-improvement-plus', ...
+     'PlotFcn', []...
+);
 
 % Find best results
 T = bestPoint(results)

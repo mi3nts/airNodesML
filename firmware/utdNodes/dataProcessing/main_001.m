@@ -22,7 +22,7 @@
 % #   Raw to Mat - Concantinates all .csv files from UTD nodes and creates 
 % #   a single .mat file for each UTD Node    
  
-for n= 31:31 
+for n= 27:31 
     
     raw2MatHPC(n);
 

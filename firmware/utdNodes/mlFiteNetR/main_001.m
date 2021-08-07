@@ -21,7 +21,7 @@
 % #   Raw to Mat - Concantinates all .csv files from UTD nodes and creates 
 % #   a single .mat file for each UTD Node    
  
-for n= 1:20 
+for n= 1:31 
     
     utdNodesV2(n)
 
