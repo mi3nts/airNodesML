@@ -3,8 +3,7 @@ tic
 display(newline)
 display("---------------------MINTS---------------------")
 
-%     nodeIndex = round(str2double(nodeIndex)) ;
-currentDate= datetime('now','timezone','utc') - days(20);
+currentDate= datetime('now','timezone','utc');
 
 display(currentDate);
 yamlFile =  '../mintsDefinitionsV2.yaml';
@@ -31,9 +30,9 @@ nodeID             =  nodeIDs{nodeIndex}.nodeID;
 resultsFile        = modelsFolder+ "WSInitialV2.csv";
 
 targets      = mintsDefinitions.targets;
-timeFile         =  strcat(scanFolder,"t_"+nodeID,".mat")
-folderCheck(timeFile)
-display(timeFile);
+% timeFile         =  strcat(scanFolder,"t_"+nodeID,".mat")
+% folderCheck(timeFile)
+% display(timeFile);
 
 todaysNodeFolder   = strcat("/*/*/",...
     num2str(year(currentDate),'%04d'),"/",...
@@ -99,7 +98,12 @@ display("Loading Best Models")
 display("Climate Bounding")
 
 % Probably and if Statement Goes here
-inCorrected = checkBounds(inCorrected,nodeID,"LiveUpdate",modelsFolder,"liveUpdate")
+inCorrected = checkBounds(inCorrected,nodeID,"LiveUpdate",modelsFolder,"liveUpdate");
+
+if height(inCorrected)<2
+    display("Sensor Error For:" +  nodeID)
+    return;
+end
 
 inCorrected = boundCorrections(inCorrected,climateParamsNow);
 
@@ -195,7 +199,7 @@ end
 
 % save(timeFile,'nextTime');
 
-printCSVT(bestModelsLabels,updateFolder,nodeID,currentDate,'modelInfo');
+printCSVT(bestModelsLabels,updateFolder,nodeID,currentDate,'modelInfoLive');
 
 display("MINTS Done")
 

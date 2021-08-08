@@ -1,0 +1,315 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ZipLatLon</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-03-16"><meta name="DC.source" content="ZipLatLon.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Get Latitude and Longitude</a></li><li><a href="#4">Get ZipCode</a></li><li><a href="#5">Find distance:</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> ZipLatLon(Zip1, Zip2)
+</pre><pre class="codeinput"><span class="comment">%ZIPLATLON Finds the a combination of latidue, longitude, Zip Code in the United States and</span>
+<span class="comment">%   distance in between two of points.</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">%   LATLONFROMZIPCODE: Get Latitude and Longitude from given Zip Code:</span>
+<span class="comment">%   [LAT1, LON1] = LATLONFROMZIPCODE(ZIP1)</span>
+<span class="comment">%   GET_ZIPCODE: Get the Zipcode from a given point with Latitude and longitude.</span>
+<span class="comment">%   [ZIPCODE1] = GET_ZIPCODE(LAT1, LON1)</span>
+<span class="comment">%   ZIPDISTANCE : Find the distance between the two zipcodes.</span>
+<span class="comment">%   [ZDIS] = ZIPDISTANCE(ZIP1, ZIP2)</span>
+<span class="comment">%</span>
+<span class="comment">%   Map look up for the Zip Code Latitude Longitude City State County CSV</span>
+<span class="comment">%   was supported August 24, 2013 by Thai Yin.</span>
+<span class="comment">%   A convenient file with all the US zip codes and their associated</span>
+<span class="comment">%   latitude, longitude, city, state, and county. was supported August 24,</span>
+<span class="comment">%   2013 by Thai Yin. Mapping modules in Drupal and WordPress may require</span>
+<span class="comment">%   this database which isn&#8217;t always included due to size.</span>
+<span class="comment">%   http://notebook.gaslampmedia.com/download-zip-code-latitude-longitude-city-state-county-csv/</span>
+<span class="comment">%</span>
+<span class="comment">%   The map then was converted to matlab data file (.mat) file</span>
+<span class="comment">%   First, finding the lat and lon data associated with the desired zipcode, then using</span>
+<span class="comment">%   the built-in DISTANCE function in MATLAB to find the distance between</span>
+<span class="comment">%   the two given zip codes.</span>
+<span class="comment">%</span>
+<span class="comment">% Example:</span>
+<span class="comment">% Zip1 = 48306 % Rochester, MI</span>
+<span class="comment">% Zip2 = 67337 % Coffeyville, KS</span>
+<span class="comment">% ZDis = ZipDistance(Zip1, Zip2)</span>
+<span class="comment">%</span>
+<span class="comment">%   See also DISTANCE.</span>
+
+<span class="comment">% Copyright @ Sami Oweis,</span>
+
+
+
+Zip1 = 48306 <span class="comment">% Rochester, MI</span>
+Zip2 = 67337 <span class="comment">% Coffeyville, KS</span>
+</pre><pre class="codeoutput">
+Zip1 =
+
+       48306
+
+
+Zip2 =
+
+       67337
+
+</pre><h2>Get Latitude and Longitude<a name="3"></a></h2><pre class="codeinput">[lat1, lon1] = LatLonFromZipCode(Zip1)
+[lat2, lon2] = LatLonFromZipCode(Zip2)
+</pre><pre class="codeoutput">
+lat1 =
+
+   42.7262
+
+
+lon1 =
+
+  -83.1566
+
+
+lat2 =
+
+   37.1463
+
+
+lon2 =
+
+  -95.7483
+
+</pre><h2>Get ZipCode<a name="4"></a></h2><pre class="codeinput">[ZipCode1] = Get_ZipCode(lat1, lon1)
+[ZipCode2] = Get_ZipCode(lat2, lon2)
+</pre><pre class="codeoutput">
+ZipCode1 =
+
+       48306
+
+
+ZipCode2 =
+
+       67337
+
+</pre><h2>Find distance:<a name="5"></a></h2><pre class="codeinput">ZDis = distance(lat1,lon1,lat2,lon2)
+</pre><pre class="codeoutput">
+ZDis =
+
+   11.1341
+
+</pre><pre class="codeinput"><span class="keyword">end</span>
+
+<span class="keyword">function</span> [lat, lon] = LatLonFromZipCode(Zip)
+
+load <span class="string">zipMap.mat</span>
+<span class="comment">% ZipInfo</span>
+<span class="comment">% ZipInfoHeaders</span>
+
+<span class="keyword">if</span> (ismember(Zip, ZipInfo(:,1)))
+    rowN = find( ZipInfo(:,1) == Zip);
+<span class="keyword">else</span>
+    rowN = 0;
+    lat  = 0;
+    lon  = 0;
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> rowN
+    lat = ZipInfo(rowN,2);
+    lon = ZipInfo(rowN,3);
+
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">function</span> [ZipCode] = Get_ZipCode(lat,lon)
+
+load <span class="string">zipMap.mat</span>
+<span class="comment">% ZipInfo</span>
+<span class="comment">% ZipInfoHeaders</span>
+
+<span class="comment">% to get correct ZipCode we need to get the lat and lon data in 4 decimal</span>
+<span class="comment">% places.</span>
+
+facV = 10000;
+lat = fix(facV* lat)/facV;
+lon = fix(facV* lon)/facV;
+ZipInfo(:,2) = fix(ZipInfo(:,2).*facV)./facV;
+ZipInfo(:,3) = fix(ZipInfo(:,3).*facV)./facV;
+row1 = 0;
+row2 = 0;
+ZipCode  = 0;
+
+
+<span class="keyword">if</span> (ismember(lat, ZipInfo(:,2)))
+    row1= find( ZipInfo(:,2) == lat);
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> (row1)
+    <span class="keyword">if</span> (ismember(lon, ZipInfo(row1,3)))
+        row2 = find( ZipInfo(:,3) == lon);
+
+        <span class="keyword">if</span> (row2)
+            ZipCode = ZipInfo(row2,1);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+function ZipLatLon(Zip1, Zip2)
+%ZIPLATLON Finds the a combination of latidue, longitude, Zip Code in the United States and
+%   distance in between two of points.
+% 
+%   
+%   LATLONFROMZIPCODE: Get Latitude and Longitude from given Zip Code: 
+%   [LAT1, LON1] = LATLONFROMZIPCODE(ZIP1)
+%   GET_ZIPCODE: Get the Zipcode from a given point with Latitude and longitude.
+%   [ZIPCODE1] = GET_ZIPCODE(LAT1, LON1)
+%   ZIPDISTANCE : Find the distance between the two zipcodes. 
+%   [ZDIS] = ZIPDISTANCE(ZIP1, ZIP2)
+% 
+%   Map look up for the Zip Code Latitude Longitude City State County CSV
+%   was supported August 24, 2013 by Thai Yin.
+%   A convenient file with all the US zip codes and their associated
+%   latitude, longitude, city, state, and county. was supported August 24,
+%   2013 by Thai Yin. Mapping modules in Drupal and WordPress may require
+%   this database which isn’t always included due to size.
+%   http://notebook.gaslampmedia.com/download-zip-code-latitude-longitude-city-state-county-csv/
+%   
+%   The map then was converted to matlab data file (.mat) file
+%   First, finding the lat and lon data associated with the desired zipcode, then using
+%   the built-in DISTANCE function in MATLAB to find the distance between
+%   the two given zip codes.
+%
+% Example:
+% Zip1 = 48306 % Rochester, MI
+% Zip2 = 67337 % Coffeyville, KS
+% ZDis = ZipDistance(Zip1, Zip2)
+%
+%   See also DISTANCE.
+
+% Copyright @ Sami Oweis,
+% $Revision: 1.0.1 $  $Date: 2014/03/16 $
+
+
+Zip1 = 48306 % Rochester, MI
+Zip2 = 67337 % Coffeyville, KS
+
+%%  Get Latitude and Longitude
+[lat1, lon1] = LatLonFromZipCode(Zip1)
+[lat2, lon2] = LatLonFromZipCode(Zip2)
+
+
+%% Get ZipCode
+[ZipCode1] = Get_ZipCode(lat1, lon1)
+[ZipCode2] = Get_ZipCode(lat2, lon2)
+
+%% Find distance:
+ZDis = distance(lat1,lon1,lat2,lon2)
+
+end
+
+function [lat, lon] = LatLonFromZipCode(Zip)
+
+load zipMap.mat
+% ZipInfo
+% ZipInfoHeaders
+
+if (ismember(Zip, ZipInfo(:,1)))
+    rowN = find( ZipInfo(:,1) == Zip);
+else
+    rowN = 0;
+    lat  = 0;
+    lon  = 0;
+end
+
+if rowN
+    lat = ZipInfo(rowN,2);
+    lon = ZipInfo(rowN,3);
+    
+end
+end
+function [ZipCode] = Get_ZipCode(lat,lon)
+
+load zipMap.mat
+% ZipInfo
+% ZipInfoHeaders
+
+% to get correct ZipCode we need to get the lat and lon data in 4 decimal
+% places.
+
+facV = 10000;
+lat = fix(facV* lat)/facV;
+lon = fix(facV* lon)/facV;
+ZipInfo(:,2) = fix(ZipInfo(:,2).*facV)./facV;
+ZipInfo(:,3) = fix(ZipInfo(:,3).*facV)./facV;
+row1 = 0;
+row2 = 0;
+ZipCode  = 0;
+
+
+if (ismember(lat, ZipInfo(:,2)))
+    row1= find( ZipInfo(:,2) == lat);
+end
+
+if (row1)
+    if (ismember(lon, ZipInfo(row1,3)))
+        row2 = find( ZipInfo(:,3) == lon);
+        
+        if (row2)
+            ZipCode = ZipInfo(row2,1);
+        end
+    end
+end
+end
+
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,4 +1,4 @@
-function tableIn = checkBoundsDaily(tableIn,nodeID,versionStr,modelsMatsFolder,fileName)
+function tableIn = checkBoundsDaily(tableIn)
 display("Applying Bounds Daily")
 % bounds = struct;
 % bounds.versionStr = versionStr;

@@ -3,5 +3,6 @@ clear all
 close all
 
 for n = 1:31
-    completeUpdate(n)
+    completeUpdateLive(n)
+    clear all -except n 
 end 

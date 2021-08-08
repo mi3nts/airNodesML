@@ -3,7 +3,7 @@
 *.yaml
 *.out
 *.err
-
+*.log
 
 # Compiled Object files
 *.slo

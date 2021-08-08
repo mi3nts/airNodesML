@@ -2,8 +2,13 @@ clc
 clear all
 close all
 
-for n = 1:31
-    for daysBack = 1:20
-        dailyUpdate(n,daysBack)
+
+
+for nodeIndex = 1:31
+ 
+    [daysBackEnd,daysBackStart] = getSummary(nodeIndex);
+    
+    for daysBack =daysBackEnd:daysBackStart
+        dailyUpdateLive(nodeIndex,daysBack)
     end
 end

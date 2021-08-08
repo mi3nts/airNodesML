@@ -1,12 +1,11 @@
-function [] = completeUpdate(nodeIndex)
-
+function [] = livePlotter(nodeIndex)
+tic
 display(newline)
-% display("---------------------MINTS---------------------")
+display("---------------------MINTS---------------------")
 
-addpath("../../../functions/")
+currentDate= datetime('now','timezone','utc');
 
-addpath("../../../YAMLMatlab_0.4.3")
-
+display(currentDate);
 yamlFile =  '../mintsDefinitionsV2.yaml';
 
 mintsDefinitions   = ReadYaml(yamlFile);
@@ -14,60 +13,63 @@ mintsDefinitions   = ReadYaml(yamlFile);
 nodeIDs            = mintsDefinitions.nodeIDs;
 dataFolder         = mintsDefinitions.dataFolder;
 
+
+climateTargets     = mintsDefinitions.climateTargets;
+pmTargets          = mintsDefinitions.pmTargets;
+allTargets         = [climateTargets,pmTargets]
+
+
 rawFolder          =  dataFolder + "/raw";
 rawMatsFolder      =  dataFolder + "/rawMats";
-updateFolder       =  dataFolder + "/liveUpdate/UTDNodes";
+updateFolder       =  dataFolder + "/liveUpdate/results/";
+scanFolder         =  dataFolder + "/liveUpdate/scan/";
 modelsFolder       =  dataFolder + "/modelsMats/UTDNodes/";
 
 timeSpan           =  seconds(mintsDefinitions.timeSpan);
 nodeID             =  nodeIDs{nodeIndex}.nodeID;
 resultsFile        = modelsFolder+ "WSInitialV2.csv";
 
+targets      = mintsDefinitions.targets;
+
+todaysNodeFolder   = strcat("/*/*/",...
+    num2str(year(currentDate),'%04d'),"/",...
+    num2str(month(currentDate),'%02d'),"/",...
+    num2str(day(currentDate),'%02d'),"/MINTS_")    ;
+
 display(newline);
 display("Data Folder Located      @ :"+ dataFolder);
 display("Raw Data Located         @ :"+ rawFolder );
 display("Raw DotMat Data Located  @ :"+ rawMatsFolder);
 display("Update Data Located      @ :"+ updateFolder);
-stringIn = "Daily";
+display("Results File Located     @ :"+ resultsFile);
+display(newline)
 
-dataFolder          = mintsDefinitions.dataFolder;
-nodeIDs             = mintsDefinitions.nodeIDs;
-timeSpan            = seconds(mintsDefinitions.timeSpan);
-binsPerColumn       = mintsDefinitions.binsPerColumn;
-numberPerBin        = mintsDefinitions.numberPerBin ;
-pValid              = mintsDefinitions.pValid;
-airmarID            = mintsDefinitions.airmarID;
-instruments         = mintsDefinitions.instruments;
-units               = mintsDefinitions.units;
-poolWorkers         = mintsDefinitions.poolWorkers;
+%% Syncing Process
+BME280     =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'BME280',timeSpan);
+GPSGPGGA2  =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'GPSGPGGA2',timeSpan);
+OPCN2      =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'OPCN2',timeSpan);
+OPCN3      =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'OPCN3',timeSpan);
 
-targets      = mintsDefinitions.targets;
-targetLabels = mintsDefinitions.targetLabels;
-units        = mintsDefinitions.units;
-limitsLow    = mintsDefinitions.limitsLow;
-limitsHigh   = mintsDefinitions.limitsHigh;
-instruments   = mintsDefinitions.instruments;
-
-climateTargets      = mintsDefinitions.climateTargets;
-climateTargetLabels = mintsDefinitions.climateTargetLabels;
-climateUnits        = mintsDefinitions.climateUnits;
-climateInstrument   = mintsDefinitions.climateInstrument;
-climateLimitsLow    = mintsDefinitions.climateLimitsLow;
-climateLimitsHigh   = mintsDefinitions.climateLimitsHigh;
-
-display("Getting Historic Update for Node: "+ nodeID);
-display("Currrent Time is "+ datestr(datetime('now')));
-display("---------------------MINTS---------------------")
-
-versionStrPreHistoric = 'UTD_V2_Historic_';
-versionStrHistoric = [versionStrPreHistoric datestr(now,'yyyy_mm_dd_HH_MM_SS')];
+if isempty(BME280)||(isempty(OPCN2)&&isempty(OPCN3))
+    display("No Data for Node:" +  nodeID)
+    return;
+end
 
 
-%% Loading from previiously Saved Data files
-loadName = strcat(rawMatsFolder,"/UTDNodes/Mints_UTD_Node_",nodeID,"_30Sec.mat");
-load(loadName)
+%% Choosing Input Stack
+liveStack = mintsDefinitions.liveStack;
 
-mintsDataUTD = nodeFixes(nodeID,mintsDataUTD,rawMatsFolder);
+display("Getting Node Data for Today");
+
+concatStr  =  "mintsDataUTD   = synchronize(";
+for stackIndex = 1: length(liveStack)
+    if(height(eval(strcat(liveStack{stackIndex})))>2)
+        concatStr = strcat(concatStr,liveStack{stackIndex},",");
+    end
+end
+concatStr  = strcat(concatStr,"'union');");
+display(concatStr)
+eval(concatStr)
 
 %% Choosing Input Stack
 eval(strcat("climateInputs        = mintsDefinitions.climateStack_",nodeIDs{nodeIndex}.climateStack,";"));
@@ -81,20 +83,28 @@ eval(strcat("pmAppends            = mintsDefinitions.pmAppends_",string(nodeIDs{
 eval(strcat("pmAppendsCalib       = mintsDefinitions.pmAppendsCalib_",string(nodeIDs{nodeIndex}.pmStack),";"));
 
 eval(strcat("sensorStack          = mintsDefinitions.sensorStack_",string(nodeIDs{nodeIndex}.pmStack),";"));
+eval(strcat("csvStack             = mintsDefinitions.csvStack_",string(nodeIDs{nodeIndex}.pmStack),";"));
 
 %% Defining Inputs
 inCorrected  = correctionsUTDV2(mintsDataUTD);
 
 % At this point I can load in the best model file
 display("Loading Best Models")
-[bestModels,bestModelsLabels,climateParamsNow] = readResultsNowV2(...
-                        resultsFile,nodeID,targets,modelsFolder);
+[bestModels,bestModelsLabels,climateParamsNow] = readResultsNowV2(resultsFile,nodeID,targets,modelsFolder);
 
 display("Climate Bounding")
 
-% Global Bounds 
-inCorrected = checkBounds(inCorrected,nodeID,versionStrHistoric,modelsFolder,"completeBounds");
-% Training Bounds 
+% Probably and if Statement Goes here
+inCorrected = checkBounds(inCorrected,nodeID,"LiveUpdate",modelsFolder,"liveUpdate");
+
+if height(inCorrected)<5
+    display("Sensor Error For:" +  nodeID)
+    return;
+end
+
+
+
+
 inCorrected = boundCorrections(inCorrected,climateParamsNow);
 
 
@@ -139,100 +149,127 @@ inCorrected.pressureOut    = 10.^(inCorrected.pressureCalib);
 inCorrected.humidityOut    = inCorrected.humidityCalib;
 inCorrected.dewPointOut    = inCorrected.dewPoint_predicted;
 
-preFigName  =  updateFolder+"/"+nodeID+"/Mints_"+nodeID;
+
+if isempty(GPSGPGGA2)
+    inCorrected.GPSGPGGA2_latitudeCoordinate(:) = nan;
+    inCorrected.GPSGPGGA2_longitudeCoordinate(:) = nan;
+    inCorrected.GPSGPGGA2_altitude(:) = nan;
+end
+
+inCorrected.GPSGPGGA2_altitude(isnan(inCorrected.GPSGPGGA2_altitude))=...
+                                        nodeIDs{nodeIndex}.altitude;
+inCorrected.GPSGPGGA2_latitudeCoordinate(isnan(inCorrected.GPSGPGGA2_latitudeCoordinate))=...
+                                        nodeIDs{nodeIndex}.latitude;
+inCorrected.GPSGPGGA2_longitudeCoordinate(isnan(inCorrected.GPSGPGGA2_longitudeCoordinate))=...
+                                        nodeIDs{nodeIndex}.longitude;
+
+%% Checks
+
+lat = rmmissing(inCorrected.GPSGPGGA2_latitudeCoordinate);
+long = rmmissing(inCorrected.GPSGPGGA2_longitudeCoordinate);
+if ~isnan(lat)
+lat = lat(end);
+long = long(end);
+zip = getZip(lat,long);
+    gpsString =  "(" + lat + "," + long +")" + " Zip Code: " +string(zip);  
+else
+    gpsString =  " ";
+end 
+
+preFigName = strrep(getPrintName(updateFolder,nodeID,currentDate,"daily"),".csv","")
 
 %% Climate Graphs 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.temperatureOut,...,...
     nodeID,...
     "Date Time (UTC)",...
     "Atmospheric Temperature (K)",...
     strcat("Atmospheric Temperature - ",strrep(string(bestModelsLabels.versionStr(1)),"_","-")),...
     "Atmospheric Temperature Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Temperature.png",...
+     preFigName +"_Temperature.png",...
     true,...
-    0,120)
+    0,120,gpsString)
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.pressureOut,...,...
     nodeID,...
     "Date Time (UTC)",...
     "Atmospheric Pressure (mili Bar)",...
     strcat("Atmospheric Pressure: ",strrep(string(bestModelsLabels.versionStr(2)),"_","-")),...
     "Atmospheric Pressure Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Pressure.png",...
+     preFigName+"_Pressure.png",...
     true,...
-    975,1010)
+    975,1010,gpsString)
 
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.humidityOut,...,...
     nodeID,...
     "Date Time (UTC)",...
     "Atmospheric Humidity (%)",...
     strcat("Atmospheric Humidity: ",strrep(string(bestModelsLabels.versionStr(3)),"_","-")),...
     "Atmospheric Humidity Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Humidity.png",...
+     preFigName+"_Humidity.png",...
     true,...
-    0,100)
+    0,100,gpsString)
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.dewPoint_predicted,...,...
     nodeID,...
     "Date Time (UTC)",...
     "Dew Point (K)",...
     strcat("Dew Point: ",strrep(string(bestModelsLabels.versionStr(4)),"_","-")),...
     "Dew Point Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_DewPoint.png",...
+     preFigName+"_DewPoint.png",...
     true,...
-    -20,100)
+    -20,100,gpsString)
 
 %% Pm Graphs 
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.pm1_palas_predicted,...,...
     nodeID,...
     "Date Time (UTC)",...
     "PM_{1} (\mug/m^{3})",...
     strcat("PM_{1}: ",strrep(string(bestModelsLabels.versionStr(5)),"_","-")),...
     "PM_{1} Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_PM1.png",...
+     preFigName+"_PM1.png",...
     true,...
-    0,40)
+    0,40,gpsString)
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.pm2_5_palas_predicted,...,...
     nodeID,...
     "Date Time (UTC)",...
     "PM_{2.5} (\mug/m^{3})",...
     strcat("PM_{2.5}: ",strrep(string(bestModelsLabels.versionStr(6)),"_","-")),...
     "PM_{2.5} Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_PM2_5.png",...
+     preFigName+"_PM2_5.png",...
     true,...
-    0,50)
+    0,50,gpsString)
 
-drawSummary1x(...
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.pm4_palas_predicted,...,...
     nodeID,...
     "Date Time (UTC)",...
     "PM_{4} (\mug/m^{3})",...
     strcat("PM_{4}: ",strrep(string(bestModelsLabels.versionStr(7)),"_","-")),...
     "PM_{4} Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_PM4.png",...
+     preFigName+"_PM4.png",...
     true,...
-    0,60)
-drawSummary1x(...
+    0,60,gpsString)
+drawSummary1x3Title(...
     inCorrected.dateTime,inCorrected.pm10_palas_predicted,...,...
     nodeID,...
     "Date Time (UTC)",...
     "PM_{10} (\mug/m^{3})",...
     strcat("PM_{10}: ",strrep(string(bestModelsLabels.versionStr(8)),"_","-")),...
     "PM_{10} Time Series",...
-     updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_PM10.png",...
+     preFigName+"_PM10.png",...
     true,...
-    0,100)
+    0,100,gpsString)
 
-drawSummary3x(...
+drawSummary3x3Title(...
     inCorrected.dateTime,inCorrected.pm1_palas_predicted,...
     inCorrected.dateTime,inCorrected.pm2_5_palas_predicted,...
     inCorrected.dateTime,inCorrected.pm10_palas_predicted,...
@@ -242,21 +279,64 @@ drawSummary3x(...
             nodeID,"Date Time (UTC)","PM (\mug/m^{3})",... 
               75,...
                "Particulate Matter Summary Plot",...
-                preFigName +"_PMSummary.png")
+                preFigName +"_PMSummary.png",gpsString)
 
 
 %% UNCOMMENT ON EUROPA
-% contourOPCSummary(...
-%     inCorrected,...
-%     nodeID,...
-%     "Date Time (UTC)",...
-%      "Particle Counts",...
-%      "Contour Plot for Binned Particle Counts", preFigName +"_Countour.png")
+contourOPCSummary3Title(...
+    inCorrected,...
+    nodeID,...
+    "Date Time (UTC)",...
+     "Particle Counts",...
+     "Contour Plot for Binned Particle Counts", preFigName +"_Countour.png",gpsString);
+
+display(" ");
+
+
+
+
 % 
-% display(" ");
-
+% 
+% 
+% 
+% varNames = inCorrected.Properties.VariableNames;
+% 
+% for n = 1 :length(varNames)
+%     varNames{n} =   strrep(varNames{n},'OPCN2_binCount','Bin');
+%     varNames{n} =   strrep(varNames{n},'OPCN3_binCount','Bin');
+%     varNames{n} =   strrep(varNames{n},'pm1_palas_predicted','PM 1');
+%     varNames{n} =   strrep(varNames{n},'pm2_5_palas_predicted','PM 2.5');
+%     varNames{n} =   strrep(varNames{n},'pm4_palas_predicted','PM 4');
+%     varNames{n} =   strrep(varNames{n},'pm10_palas_predicted','PM 10');
+%     varNames{n} =   strrep(varNames{n},'temperatureOut','Temperature');
+%     varNames{n} =   strrep(varNames{n},'pressureOut','Pressure');
+%     varNames{n} =   strrep(varNames{n},'humidityOut','Humidity');
+%     varNames{n} =   strrep(varNames{n},'dewPointOut','Dew Point');
+%     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_latitudeCoordinate','Latitude');
+%     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_longitudeCoordinate','Longitude');
+%     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_altitude','Altitude');
+% end
+% 
+% inCorrected.Properties.VariableNames = varNames;
+% inCorrected.dateTime.Format =  'uuuu-MM-dd HH:mm:ss.SSS';
+% 
+% predictedFinal =  inCorrected(:,csvStack);
+% 
+% printName=getPrintName(updateFolder,nodeID,currentDate,'calibrated');
+% csvAvailable =     isfile(printName);
+% 
+% if csvAvailable
+%     writetimetable(predictedFinal,printName,'WriteMode','append','WriteVariableNames',false)
+% else
+%     writetimetable(predictedFinal,  printName)
+% end
+% 
+% % save(timeFile,'nextTime');
+% 
+% printCSVT(bestModelsLabels,updateFolder,nodeID,currentDate,'modelInfoLive');
+% 
+% display("MINTS Done")
+% 
+% toc
 end
-
-%% 5a61 : Aug 2021, Oct 10 - Now
-%% 5a12 : Sep - Oct 10 @ Joppa
 
