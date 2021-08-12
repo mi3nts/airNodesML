@@ -35,7 +35,7 @@ for n = 1 : length(mintsTargets)
 end
 
 
-display("Climate Params")
+display("Climate Params");
 % Get The Appropriate Climate Params
 
 maxTemperatureK = climateParams{1}.maxTemperatureK;

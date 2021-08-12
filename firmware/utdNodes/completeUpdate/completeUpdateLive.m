@@ -156,7 +156,7 @@ else
 end 
 
 
-preFigName  =  updateFolder+"/"+nodeID+"/Mints_"+nodeID;
+preFigName  =  updateFolder+"/"+nodeID+"/summary/Mints_"+nodeID;
 
 
 %% Climate Graphs 
@@ -273,7 +273,7 @@ contourOPCSummary3Title(...
  
 display(" ");
 
-printName= updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Raw_Historic.mat";
+printName= updateFolder+"/"+nodeID+"/summary/Mints_"+nodeID+"_Raw.mat";
 display("MINTS Saving: " +printName)
 save( printName,'inCorrected');
 
@@ -303,10 +303,10 @@ printName= updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Complete.csv";
 display("MINTS Saving: " +printName)
 writetimetable(predictedFinal,  printName)
 
-printCSVHistoric(bestModelsLabels,updateFolder,nodeID,'modelInfoHistoric');
+printCSVHistoric(bestModelsLabels,updateFolder,nodeID,'modelInfo');
 display("MINTS CSVs Done")
 
-
+getScatterPlotResults(nodeIndex)
 
 end
 
