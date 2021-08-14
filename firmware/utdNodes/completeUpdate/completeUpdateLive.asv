@@ -1,11 +1,12 @@
-function [] = livePlotter(nodeIndex)
-tic
-display(newline)
-display("---------------------MINTS---------------------")
-
+function [] = completeUpdateLive(nodeIndex)
 currentDate= datetime('now','timezone','utc');
+display(newline)
+% display("---------------------MINTS---------------------")
 
-display(currentDate);
+addpath("../../../functions/")
+addpath("../../../functions/ZipLatLon")
+addpath("../../../YAMLMatlab_0.4.3")
+
 yamlFile =  '../mintsDefinitionsV2.yaml';
 
 mintsDefinitions   = ReadYaml(yamlFile);
@@ -13,63 +14,60 @@ mintsDefinitions   = ReadYaml(yamlFile);
 nodeIDs            = mintsDefinitions.nodeIDs;
 dataFolder         = mintsDefinitions.dataFolder;
 
-
-climateTargets     = mintsDefinitions.climateTargets;
-pmTargets          = mintsDefinitions.pmTargets;
-allTargets         = [climateTargets,pmTargets]
-
-
 rawFolder          =  dataFolder + "/raw";
 rawMatsFolder      =  dataFolder + "/rawMats";
-updateFolder       =  dataFolder + "/liveUpdate/results/";
-scanFolder         =  dataFolder + "/liveUpdate/scan/";
+updateFolder       =  dataFolder + "/liveUpdate/UTDNodes";
 modelsFolder       =  dataFolder + "/modelsMats/UTDNodes/";
 
 timeSpan           =  seconds(mintsDefinitions.timeSpan);
 nodeID             =  nodeIDs{nodeIndex}.nodeID;
 resultsFile        = modelsFolder+ "WSInitialV2.csv";
 
-targets      = mintsDefinitions.targets;
-
-todaysNodeFolder   = strcat("/*/*/",...
-    num2str(year(currentDate),'%04d'),"/",...
-    num2str(month(currentDate),'%02d'),"/",...
-    num2str(day(currentDate),'%02d'),"/MINTS_")    ;
-
 display(newline);
 display("Data Folder Located      @ :"+ dataFolder);
 display("Raw Data Located         @ :"+ rawFolder );
 display("Raw DotMat Data Located  @ :"+ rawMatsFolder);
 display("Update Data Located      @ :"+ updateFolder);
-display("Results File Located     @ :"+ resultsFile);
-display(newline)
+stringIn = "Daily";
 
-%% Syncing Process
-BME280     =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'BME280',timeSpan);
-GPSGPGGA2  =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'GPSGPGGA2',timeSpan);
-OPCN2      =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'OPCN2',timeSpan);
-OPCN3      =  getSyncedDataV2(dataFolder,todaysNodeFolder ,nodeID,'OPCN3',timeSpan);
+dataFolder          = mintsDefinitions.dataFolder;
+nodeIDs             = mintsDefinitions.nodeIDs;
+timeSpan            = seconds(mintsDefinitions.timeSpan);
+binsPerColumn       = mintsDefinitions.binsPerColumn;
+numberPerBin        = mintsDefinitions.numberPerBin ;
+pValid              = mintsDefinitions.pValid;
+airmarID            = mintsDefinitions.airmarID;
+instruments         = mintsDefinitions.instruments;
+units               = mintsDefinitions.units;
+poolWorkers         = mintsDefinitions.poolWorkers;
 
-if isempty(BME280)||(isempty(OPCN2)&&isempty(OPCN3))
-    display("No Data for Node:" +  nodeID)
-    return;
-end
+targets      = mintsDefinitions.targets;
+targetLabels = mintsDefinitions.targetLabels;
+units        = mintsDefinitions.units;
+limitsLow    = mintsDefinitions.limitsLow;
+limitsHigh   = mintsDefinitions.limitsHigh;
+instruments   = mintsDefinitions.instruments;
+
+climateTargets      = mintsDefinitions.climateTargets;
+climateTargetLabels = mintsDefinitions.climateTargetLabels;
+climateUnits        = mintsDefinitions.climateUnits;
+climateInstrument   = mintsDefinitions.climateInstrument;
+climateLimitsLow    = mintsDefinitions.climateLimitsLow;
+climateLimitsHigh   = mintsDefinitions.climateLimitsHigh;
+
+display("Getting Historic Update for Node: "+ nodeID);
+display("Currrent Time is "+ datestr(datetime('now')));
+display("---------------------MINTS---------------------")
+
+versionStrPreHistoric = 'UTD_V2_Historic_';
+versionStrHistoric = [versionStrPreHistoric datestr(now,'yyyy_mm_dd_HH_MM_SS')];
 
 
-%% Choosing Input Stack
-liveStack = mintsDefinitions.liveStack;
+%% Loading from previiously Saved Data files
+loadName = strcat(rawMatsFolder,"/UTDNodes/Mints_UTD_Node_",nodeID,"_30Sec.mat");
+load(loadName)
 
-display("Getting Node Data for Today");
-
-concatStr  =  "mintsDataUTD   = synchronize(";
-for stackIndex = 1: length(liveStack)
-    if(height(eval(strcat(liveStack{stackIndex})))>2)
-        concatStr = strcat(concatStr,liveStack{stackIndex},",");
-    end
-end
-concatStr  = strcat(concatStr,"'union');");
-display(concatStr)
-eval(concatStr)
+mintsDataUTD = nodeFixes(nodeID,mintsDataUTD,rawMatsFolder);
 
 %% Choosing Input Stack
 eval(strcat("climateInputs        = mintsDefinitions.climateStack_",nodeIDs{nodeIndex}.climateStack,";"));
@@ -90,21 +88,14 @@ inCorrected  = correctionsUTDV2(mintsDataUTD);
 
 % At this point I can load in the best model file
 display("Loading Best Models")
-[bestModels,bestModelsLabels,climateParamsNow] = readResultsNowV2(resultsFile,nodeID,targets,modelsFolder);
+[bestModels,bestModelsLabels,climateParamsNow] = readResultsNowV2(...
+                        resultsFile,nodeID,targets,modelsFolder);
 
 display("Climate Bounding")
 
-% Probably and if Statement Goes here
-inCorrected = checkBounds(inCorrected,nodeID,"LiveUpdate",modelsFolder,"liveUpdate");
-
-if height(inCorrected)<5
-    display("Sensor Error For:" +  nodeID)
-    return;
-end
-
-
-
-
+% Global Bounds 
+inCorrected = checkBounds(inCorrected,nodeID,versionStrHistoric,modelsFolder,"completeBounds");
+% Training Bounds 
 inCorrected = boundCorrections(inCorrected,climateParamsNow);
 
 
@@ -150,20 +141,8 @@ inCorrected.humidityOut    = inCorrected.humidityCalib;
 inCorrected.dewPointOut    = inCorrected.dewPoint_predicted;
 
 
-if isempty(GPSGPGGA2)
-    inCorrected.GPSGPGGA2_latitudeCoordinate(:) = nan;
-    inCorrected.GPSGPGGA2_longitudeCoordinate(:) = nan;
-    inCorrected.GPSGPGGA2_altitude(:) = nan;
-end
 
-inCorrected.GPSGPGGA2_altitude(isnan(inCorrected.GPSGPGGA2_altitude))=...
-                                        nodeIDs{nodeIndex}.altitude;
-inCorrected.GPSGPGGA2_latitudeCoordinate(isnan(inCorrected.GPSGPGGA2_latitudeCoordinate))=...
-                                        nodeIDs{nodeIndex}.latitude;
-inCorrected.GPSGPGGA2_longitudeCoordinate(isnan(inCorrected.GPSGPGGA2_longitudeCoordinate))=...
-                                        nodeIDs{nodeIndex}.longitude;
-
-%% Checks
+%% Graphing
 
 lat = rmmissing(inCorrected.GPSGPGGA2_latitudeCoordinate);
 long = rmmissing(inCorrected.GPSGPGGA2_longitudeCoordinate);
@@ -176,7 +155,9 @@ else
     gpsString =  " ";
 end 
 
-preFigName = strrep(getPrintName(updateFolder,nodeID,currentDate,"daily"),".csv","")
+
+preFigName  =  updateFolder+"/"+nodeID+"/summary/Mints_"+nodeID;
+
 
 %% Climate Graphs 
 drawSummary1x3Title(...
@@ -283,14 +264,53 @@ drawSummary3x3Title(...
 
 
 %% UNCOMMENT ON EUROPA
-contourOPCSummary3Title(...
-    inCorrected,...
-    nodeID,...
-    "Date Time (UTC)",...
-     "Particle Diametor",...
-     "Contour Plot for Binned Particle Counts", preFigName +"_Countour.png",gpsString);
+% contourOPCSummary3Title(...
+%      inCorrected,...
+%      nodeID,...
+%      "Date Time (UTC)",...
+%       "Particle Diametor",...
+%       "Contour Plot for Binned Particle Counts", preFigName +"_Countour.png",gpsString);
+ 
+display("");
 
-display(" ");
+printName= updateFolder+"/"+nodeID+"/summary/Mints_"+nodeID+"_Raw.mat";
+display("MINTS Saving: " +printName)
+save( printName,'inCorrected');
+
+varNames = inCorrected.Properties.VariableNames;
+
+for n = 1 :length(varNames)
+    varNames{n} =   strrep(varNames{n},'OPCN2_binCount','Bin');
+    varNames{n} =   strrep(varNames{n},'OPCN3_binCount','Bin');
+    varNames{n} =   strrep(varNames{n},'pm1_palas_predicted','PM 1');
+    varNames{n} =   strrep(varNames{n},'pm2_5_palas_predicted','PM 2.5');
+    varNames{n} =   strrep(varNames{n},'pm4_palas_predicted','PM 4');
+    varNames{n} =   strrep(varNames{n},'pm10_palas_predicted','PM 10');
+    varNames{n} =   strrep(varNames{n},'temperatureOut','Temperature');
+    varNames{n} =   strrep(varNames{n},'pressureOut','Pressure');
+    varNames{n} =   strrep(varNames{n},'humidityOut','Humidity');
+    varNames{n} =   strrep(varNames{n},'dewPointOut','Dew Point');
+    varNames{n} =   strrep(varNames{n},'GPSGPGGA2_latitudeCoordinate','Latitude');
+    varNames{n} =   strrep(varNames{n},'GPSGPGGA2_longitudeCoordinate','Longitude');
+    varNames{n} =   strrep(varNames{n},'GPSGPGGA2_altitude','Altitude');
+end
+
+inCorrected.Properties.VariableNames = varNames;
+inCorrected.dateTime.Format =  'uuuu-MM-dd HH:mm:ss.SSS';
+predictedFinal =  inCorrected(:,csvStack);
+
+printName= updateFolder+"/"+nodeID+"/Mints_"+nodeID+"_Complete.csv";
+display("MINTS Saving: " +printName)
+writetimetable(predictedFinal,  printName)
+
+printCSVHistoric(bestModelsLabels,updateFolder,nodeID,'modelInfo');
+display("MINTS CSVs Done")
+
+getScatterPlotResults(nodeIndex)
+boundSummary(modelsFolder,"completeUpdate",nodeIDs)
 
 end
+
+%% 5a61 : Aug 2021, Oct 10 - Now
+%% 5a12 : Sep - Oct 10 @ Joppa
 

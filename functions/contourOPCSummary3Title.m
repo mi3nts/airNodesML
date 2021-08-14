@@ -82,7 +82,7 @@ if(height(dataIn)>1)
     calibratedTable = timetable2table(dataIn);
     calibratedArray = calibratedTable(:,contourOut);
     
-    contourf(timeIn,[1:length(binCenters)],table2array(calibratedArray)',50,'LineStyle', 'None');
+    contourf(timeIn,[1:length(binCenters)],log10(table2array(calibratedArray))',50,'LineStyle', 'None');
     yticks([1:1:length(binCenters)]);
     yticklabels(string(binCenters));
     if(dataIn.dateTime(end)-dataIn.dateTime(1) <hours(24))

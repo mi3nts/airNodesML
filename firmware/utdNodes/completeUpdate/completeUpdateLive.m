@@ -263,15 +263,15 @@ drawSummary3x3Title(...
                 preFigName +"_PMSummary.png",gpsString)
 
 
-%% UNCOMMENT ON EUROPA
+% UNCOMMENT ON EUROPA
 contourOPCSummary3Title(...
      inCorrected,...
      nodeID,...
      "Date Time (UTC)",...
-      "log_{10} (Particle Diametor)",...
+      "Particle Diametor",...
       "Contour Plot for Binned Particle Counts", preFigName +"_Countour.png",gpsString);
  
-display(" ");
+display("");
 
 printName= updateFolder+"/"+nodeID+"/summary/Mints_"+nodeID+"_Raw.mat";
 display("MINTS Saving: " +printName)
@@ -307,6 +307,7 @@ printCSVHistoric(bestModelsLabels,updateFolder,nodeID,'modelInfo');
 display("MINTS CSVs Done")
 
 getScatterPlotResults(nodeIndex)
+boundSummary(modelsFolder,"completeBounds",nodeIDs,7.5)
 
 end
 
