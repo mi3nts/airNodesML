@@ -1,7 +1,7 @@
 #!/bin/bash
 matlab -nodisplay -nosplash -nodesktop -batch 'try getSummary('$1'); catch; end; quit'
 
-INPUT=summary/summary_1.log
+INPUT=summary/summary_$1.log
 OLDIFS=$IFS
 IFS=','
 [ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
