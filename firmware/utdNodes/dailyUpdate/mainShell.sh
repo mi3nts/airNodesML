@@ -5,7 +5,7 @@ while [ "$nodeIndex" != 32 ]; do
 
   echo  nodeIndex $nodeIndex
   echo  "------------"
- ./testShell.sh $nodeIndex
+ ./dailyUpdateShell.sh $nodeIndex
   nodeIndex=`expr $nodeIndex + 1`  
 
 done
