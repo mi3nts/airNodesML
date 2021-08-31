@@ -170,14 +170,14 @@ varNames = inCorrected.Properties.VariableNames;
 for n = 1 :length(varNames)
     varNames{n} =   strrep(varNames{n},'OPCN2_binCount','Bin');
     varNames{n} =   strrep(varNames{n},'OPCN3_binCount','Bin');
-    varNames{n} =   strrep(varNames{n},'pm1_palas_predicted','PM 1');
-    varNames{n} =   strrep(varNames{n},'pm2_5_palas_predicted','PM 2.5');
-    varNames{n} =   strrep(varNames{n},'pm4_palas_predicted','PM 4');
-    varNames{n} =   strrep(varNames{n},'pm10_palas_predicted','PM 10');
+    varNames{n} =   strrep(varNames{n},'pm1_palas_predicted','PM1');
+    varNames{n} =   strrep(varNames{n},'pm2_5_palas_predicted','PM2_5');
+    varNames{n} =   strrep(varNames{n},'pm4_palas_predicted','PM4');
+    varNames{n} =   strrep(varNames{n},'pm10_palas_predicted','PM10');
     varNames{n} =   strrep(varNames{n},'temperatureOut','Temperature');
     varNames{n} =   strrep(varNames{n},'pressureOut','Pressure');
     varNames{n} =   strrep(varNames{n},'humidityOut','Humidity');
-    varNames{n} =   strrep(varNames{n},'dewPointOut','Dew Point');
+    varNames{n} =   strrep(varNames{n},'dewPointOut','DewPoint');
     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_latitudeCoordinate','Latitude');
     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_longitudeCoordinate','Longitude');
     varNames{n} =   strrep(varNames{n},'GPSGPGGA2_altitude','Altitude');
@@ -189,13 +189,13 @@ inCorrected.dateTime.Format =  'uuuu-MM-dd HH:mm:ss.SSS';
 predictedFinal =  inCorrected(:,csvStack);
 
 printName=getPrintName(updateFolder,nodeID,currentDate,'calibrated');
-csvAvailable =     isfile(printName);
+%csvAvailable =     isfile(printName);
 
-if csvAvailable
-    writetimetable(predictedFinal,printName,'WriteMode','append','WriteVariableNames',false)
-else
+%if csvAvailable
+%    writetimetable(predictedFinal,printName,'WriteMode','append','WriteVariableNames',false)
+%else
     writetimetable(predictedFinal,  printName)
-end
+%end
 
 % save(timeFile,'nextTime');
 
