@@ -39,7 +39,7 @@ for fileNameIndex = 1: length(Data)
 end
 concatStr  =  strcat(concatStr,"];");
 
-display(concatStr);
+% display(concatStr);
 eval(concatStr);
 
 end
