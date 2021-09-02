@@ -14,6 +14,8 @@ else
 end
 
 if sum(contains(tableIn.Properties.VariableNames,"BME280"))>0
+
+        
     temperatureOOBIndex = tableIn.BME280_temperatureK>120 |tableIn.BME280_temperatureK<20;
     pressureOOBIndex    = tableIn.BME280_pressureLog>3.01|tableIn.BME280_pressureLog<2.98;
     humidityOOBIndex    = tableIn.BME280_humidity>100|tableIn.BME280_humidity<0;
@@ -67,6 +69,59 @@ if sum(contains(tableIn.Properties.VariableNames,"BME280"))>0
         bounds.humidityOOBPerWeekly    = -1;
     end
     
+ if sum(contains(tableIn.Properties.VariableNames,"OPCN2"))>0
+    OpcOOBIndex = tableIn.OPCN2_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableIn));
+    bounds.OpcOOBPer = OpcOOBPer;
+    tableIn(OpcOOBIndex,:) = [];
+    
+    if(height(tableInWeek)>0)
+    OpcOOBIndex = tableInWeek.OPCN2_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableInLatest));
+    bounds.OpcOOBPerWeekly = OpcOOBPer;
+    else
+    bounds.OpcOOBPerWeekly = -1;
+    end
+    
+     
+    if(height(tableInLatest)>0)
+    OpcOOBIndex = tableInLatest.OPCN2_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableInLatest));
+    bounds.OpcOOBPerLatest = OpcOOBPer;
+    else
+    bounds.OpcOOBPerLatest = -1;
+    end
+ end
+
+  if sum(contains(tableIn.Properties.VariableNames,"OPCN3"))>0
+    OpcOOBIndex = tableIn.OPCN3_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableIn));
+    bounds.OpcOOBPer = OpcOOBPer;
+    tableIn(OpcOOBIndex,:) = [];
+    
+    if(height(tableInWeek)>0)
+    OpcOOBIndex = tableInWeek.OPCN3_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableInWeek));
+    bounds.OpcOOBPerWeekly = OpcOOBPer;
+    else
+    bounds.OpcOOBPerWeekly = -1;
+    end
+        
+    if(height(tableInLatest)>0)
+    OpcOOBIndex = tableInLatest.OPCN3_binCount0==0;
+    OpcOOB      = sum(OpcOOBIndex);
+    OpcOOBPer   = 100*(OpcOOB/height(tableInLatest));
+    bounds.OpcOOBPerLatest = OpcOOBPer;
+    else
+    bounds.OpcOOBPerLatest = -1;
+    end
+  end
+
     resultsT =  struct2table(bounds)   ;
     display(resultsT)
     % Global CSV  Changed to test CSV
@@ -84,7 +139,5 @@ if sum(contains(tableIn.Properties.VariableNames,"BME280"))>0
     end
     
     display(newline);
-    
-end
 
 end

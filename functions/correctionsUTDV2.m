@@ -9,7 +9,8 @@ if sum(contains(tableIn.Properties.VariableNames,"BME280"))>0
 end
 
 if sum(contains(tableIn.Properties.VariableNames,"OPCN2"))>0
-    tableIn(tableIn.OPCN2_pm1>1000,:) = [] ;
+%     tableIn(tableIn.OPCN2_pm1>1000,:) = [] ;
+
     tableIn.OPCN2_binCount0Log   = log10( tableIn.OPCN2_binCount0+1);
     tableIn.OPCN2_binCount1Log   = log10( tableIn.OPCN2_binCount1+1);
     tableIn.OPCN2_binCount2Log   = log10( tableIn.OPCN2_binCount2+1);
@@ -29,7 +30,7 @@ if sum(contains(tableIn.Properties.VariableNames,"OPCN2"))>0
 end
 
 if  sum(contains(tableIn.Properties.VariableNames,"OPCN3"))>0
-    tableIn(tableIn.OPCN3_pm2_5>1000,:) = [] ;
+%     tableIn(tableIn.OPCN3_pm2_5>1000,:) = [] ;
     tableIn.OPCN3_binCount0Log   = log10( tableIn.OPCN3_binCount0+1);
     tableIn.OPCN3_binCount1Log   = log10( tableIn.OPCN3_binCount1+1);
     tableIn.OPCN3_binCount2Log   = log10( tableIn.OPCN3_binCount2+1);
