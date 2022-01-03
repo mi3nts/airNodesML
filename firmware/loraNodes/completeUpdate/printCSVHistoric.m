@@ -1,0 +1,13 @@
+function [] = printCSVHistoric(calibrated,folder,nodeID,stringIn)
+%PRINTCSVDAILY Summary of this function goes here
+                    
+    outCalibratedFileName    = strcat(folder,"/",nodeID,"/summary/",...
+                                                      "MINTS_",...
+                                                     nodeID,...
+                                                     "_",stringIn,".csv"...
+                                                 );  
+                                             
+
+    folderCheck(outCalibratedFileName)
+    writetable(calibrated,outCalibratedFileName)
+end

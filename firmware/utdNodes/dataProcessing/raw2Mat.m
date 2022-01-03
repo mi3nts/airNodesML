@@ -49,7 +49,7 @@ display(newline)
 % syncFromCloudUTDNodes(nodeIDs,dataFolder)
 
 
-for nodeIndex = 27: length(nodeIDs)
+for nodeIndex = 1: length(nodeIDs)
     
     nodeID         = nodeIDs{nodeIndex}.nodeID;
     
