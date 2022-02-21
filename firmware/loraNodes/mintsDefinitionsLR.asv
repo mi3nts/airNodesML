@@ -1,0 +1,1387 @@
+# dataFolder : "/mfs/io/groups/lary/mintsData"
+dataFolder : "/home/teamlary/mnt/teamlary1/mintsData"
+#dataFolder : "/media/teamlary/teamlary3/air930/mintsData"
+
+poolWorkers: 10
+
+timeSpan: 60
+
+airmarID: "001e0610c0e4"
+
+binsPerColumn  : 100
+numberPerBin   : 4
+
+pValid         : 0.15
+
+minLayers : 5
+maxLayers  : 10
+MaxEvaluations : 20
+
+nodeIDs:
+ - nodeID: 47db558000350039
+   sensorStack: 1 
+ - nodeID: 475a5fe30021002d
+   sensorStack: 3
+ - nodeID: 472b544e0018003c
+   sensorStack: 4
+ - nodeID: 47db558000400039
+   sensorStack: 4
+ - nodeID: 472b544e001b003c
+   sensorStack: 1
+ - nodeID: 475a5fe30024001c
+   sensorStack: 4
+ - nodeID: 47db558000410047
+   sensorStack: 4
+ - nodeID: 475a5fe300340018
+   sensorStack: 4
+ - nodeID: 47eb5580003c001a
+   sensorStack: 4
+ - nodeID: 475a5fe3003e0023
+   sensorStack: 4
+ - nodeID: 472b544e00230033
+   sensorStack: 4
+ - nodeID: 472b544e00240036
+   sensorStack: 1
+ - nodeID: 475a5fe3003b001b
+   sensorStack: 2
+ - nodeID: 47cb5580003a001c
+   sensorStack: 2
+ - nodeID: 475a5fe300440023
+   sensorStack: 3
+ - nodeID: 47db558000240039
+   sensorStack: 4
+ - nodeID: 475a5fe3003c0023
+   sensorStack: 4
+ - nodeID: 472b544e0024002b
+   sensorStack: 4
+ - nodeID: 47db558000330044
+   sensorStack: 4
+ - nodeID: 47db5580001e0039
+   sensorStack: 4
+ - nodeID: 8cf95720000589b5
+   sensorStack: 4
+ - nodeID: 472b544e002d004b
+   sensorStack: 1
+ - nodeID: 475a5fe30033001a
+   sensorStack: 2
+ - nodeID: 476a5fe30022002b
+   sensorStack: 2
+ - nodeID: 475a5fe300480023
+   sensorStack: 4
+ - nodeID: 472b544e00250042
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 47eb5580002f0019
+   sensorStack: 4
+ - nodeID: 475a5fe30035001b
+   sensorStack: 4
+ - nodeID: 47db5580002f0042
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 475a5fe3002e001f
+   sensorStack: 1
+ - nodeID: 47db5fe300200033
+   sensorStack: 2
+ - nodeID: 472b544e0024004b
+   sensorStack: 2
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 47db5580002b0039
+   sensorStack: 3
+ - nodeID: 471b41f200340049
+   sensorStack: 4
+ - nodeID: 475a5fe300400022
+   sensorStack: 4
+ - nodeID: 478b5fe30040004b
+   sensorStack: 1
+ - nodeID: 477b41f2004c0035
+   sensorStack: 4
+ - nodeID: 477b41f20048001f
+   sensorStack: 1
+ - nodeID: 478b5fe3002c0019
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 475a5fe30035001a
+   sensorStack: 4
+ - nodeID: 477b41f20049002f
+   sensorStack: 3
+ - nodeID: 47bb5580002d0049
+   sensorStack: 4
+ - nodeID: 47fb558000450044
+   sensorStack: 4
+ - nodeID: 47fb5fe30039004a
+   sensorStack: 1
+ - nodeID: 475a5fe3002a001a
+   sensorStack: 2
+ - nodeID: 47db558000390039
+   sensorStack: 4
+ - nodeID: 475a5fe300200021
+   sensorStack: 4
+ - nodeID: 47cb55800041001c
+   sensorStack: 4
+ - nodeID: 472b544e0028002b
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 47db558000340048
+   sensorStack: 3
+ - nodeID: 475a5fe30031001f
+   sensorStack: 4
+ - nodeID: 475a5fe300320019
+   sensorStack: 4
+ - nodeID: 479b5580001a0031
+   sensorStack: 4
+ - nodeID: 47db558000350047
+   sensorStack: 4
+ - nodeID: 479b558000320033
+   sensorStack: 1
+ - nodeID: 476a5fe300330021
+   sensorStack: 4
+ - nodeID: 476a5fe3003f0021
+   sensorStack: 4
+ - nodeID: 47bb5580001f0020
+   sensorStack: 4
+ - nodeID: 476a5fe300420032
+   sensorStack: 4
+ - nodeID: 475a5fe30038001a
+   sensorStack: 4
+ - nodeID: a000000000000000
+   sensorStack: 4
+ - nodeID: 475a5fe3003b0022
+   sensorStack: 4
+ - nodeID: 47cb558000220031
+   sensorStack: 4
+ - nodeID: 476a5fe300410020
+   sensorStack: 4
+ - nodeID: 8cf9572000059fd7
+   sensorStack: 4
+ - nodeID: 8cf9572000058543
+   sensorStack: 4
+ - nodeID: 475a5fe300300019
+   sensorStack: 4
+ - nodeID: 472b544e00450034
+   sensorStack: 4
+ - nodeID: 478b558000330027
+   sensorStack: 4
+ - nodeID: 479b558000380033
+   sensorStack: 4
+ - nodeID: 470a55800048003e
+   sensorStack: 4
+ - nodeID: 475a5fe3002e0018
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: 8cf9572000059e7e
+   sensorStack: 4
+ - nodeID: 471a55800038004e
+   sensorStack: 4
+ - nodeID: 475a5fe3002c0020
+   sensorStack: 4
+ - nodeID: 475a5fe3002e0036
+   sensorStack: 4
+nodeIDs:
+ - nodeID: 47db558000350039
+   sensorStack: 4
+ - nodeID: 475a5fe30021002d
+   sensorStack: 4
+ - nodeID: 472b544e0018003c
+   sensorStack: 4
+ - nodeID: 47db558000400039
+   sensorStack: 4
+ - nodeID: 472b544e001b003c
+   sensorStack: 4
+ - nodeID: 475a5fe30024001c
+   sensorStack: 4
+ - nodeID: 47db558000410047
+   sensorStack: 4
+ - nodeID: 475a5fe300340018
+   sensorStack: 4
+ - nodeID: 47eb5580003c001a
+   sensorStack: 4
+ - nodeID: 475a5fe3003e0023
+   sensorStack: 4
+ - nodeID: 472b544e00230033
+   sensorStack: 4
+ - nodeID: 472b544e00240036
+   sensorStack: 4
+ - nodeID: 475a5fe3003b001b
+   sensorStack: 4
+ - nodeID: 47cb5580003a001c
+   sensorStack: 4
+ - nodeID: 475a5fe300440023
+   sensorStack: 4
+ - nodeID: 47db558000240039
+   sensorStack: 4
+ - nodeID: 475a5fe3003c0023
+   sensorStack: 4
+ - nodeID: 472b544e0024002b
+   sensorStack: 4
+ - nodeID: 47db558000330044
+   sensorStack: 4
+ - nodeID: 47db5580001e0039
+   sensorStack: 4
+ - nodeID: 8cf95720000589b5
+   sensorStack: 4
+ - nodeID: 472b544e002d004b
+   sensorStack: 4
+ - nodeID: 475a5fe30033001a
+   sensorStack: 4
+ - nodeID: 476a5fe30022002b
+   sensorStack: 4
+ - nodeID: 475a5fe300480023
+   sensorStack: 4
+ - nodeID: 472b544e00250042
+   sensorStack: 4
+ - nodeID: 8cf9572000059fd3
+   sensorStack: 4
+ - nodeID: 47eb5580002f0019
+   sensorStack: 4
+ - nodeID: 475a5fe30035001b
+   sensorStack: 4
+ - nodeID: 47db5580002f0042
+   sensorStack: 4
+ - nodeID: 477b41f200470032
+   sensorStack: 4
+ - nodeID: 475a5fe3002e001f
+   sensorStack: 4
+ - nodeID: 47db5fe300200033
+   sensorStack: 4
+ - nodeID: 472b544e0024004b
+   sensorStack: 4
+ - nodeID: 472b544e00270032
+   sensorStack: 4
+ - nodeID: 47db5580002b0039
+   sensorStack: 4
+ - nodeID: 471b41f200340049
+   sensorStack: 4
+ - nodeID: 475a5fe300400022
+   sensorStack: 4
+ - nodeID: 478b5fe30040004b
+   sensorStack: 4
+ - nodeID: 477b41f2004c0035
+   sensorStack: 4
+ - nodeID: 477b41f20048001f
+   sensorStack: 4
+ - nodeID: 478b5fe3002c0019
+   sensorStack: 4
+ - nodeID: 47db558000420035
+   sensorStack: 4
+ - nodeID: 475a5fe3002f001b
+   sensorStack: 4
+ - nodeID: 475a5fe30035001a
+   sensorStack: 4
+ - nodeID: 477b41f20049002f
+   sensorStack: 4
+ - nodeID: 47bb5580002d0049
+   sensorStack: 4
+ - nodeID: 47fb558000450044
+   sensorStack: 4
+ - nodeID: 47fb5fe30039004a
+   sensorStack: 4
+ - nodeID: 475a5fe3002a001a
+   sensorStack: 4
+ - nodeID: 47db558000390039
+   sensorStack: 4
+ - nodeID: 475a5fe300200021
+   sensorStack: 4
+ - nodeID: 47cb55800041001c
+   sensorStack: 4
+ - nodeID: 472b544e0028002b
+   sensorStack: 4
+ - nodeID: 471b41f20034004a
+   sensorStack: 4
+ - nodeID: 47db558000340048
+   sensorStack: 4
+ - nodeID: 475a5fe30031001f
+   sensorStack: 4
+ - nodeID: 475a5fe300320019
+   sensorStack: 4
+ - nodeID: 479b5580001a0031
+   sensorStack: 4
+ - nodeID: 47db558000350047
+   sensorStack: 4
+ - nodeID: 479b558000320033
+   sensorStack: 4
+ - nodeID: 476a5fe300330021
+   sensorStack: 4
+ - nodeID: 476a5fe3003f0021
+   sensorStack: 4
+ - nodeID: 47bb5580001f0020
+   sensorStack: 4
+ - nodeID: 476a5fe300420032
+   sensorStack: 4
+ - nodeID: 475a5fe30038001a
+   sensorStack: 4
+ - nodeID: 475b41f20037001e
+   sensorStack: 4
+ - nodeID: 475a5fe3003b0022
+   sensorStack: 4
+ - nodeID: 47cb558000220031
+   sensorStack: 4
+ - nodeID: 476a5fe300410020
+   sensorStack: 4
+ - nodeID: 8cf9572000059fd7
+   sensorStack: 4
+ - nodeID: 8cf9572000058543
+   sensorStack: 4
+ - nodeID: 475a5fe300300019
+   sensorStack: 4
+ - nodeID: 472b544e00450034
+   sensorStack: 4
+ - nodeID: 478b558000330027
+   sensorStack: 4
+ - nodeID: 479b558000380033
+   sensorStack: 4
+ - nodeID: 470a55800048003e
+   sensorStack: 4
+ - nodeID: 475a5fe3002e0018
+   sensorStack: 4
+ - nodeID: 47bb558000280041
+   sensorStack: 4
+ - nodeID: 8cf957200005854f
+   sensorStack: 4
+ - nodeID: 475a5fe3002d001f
+   sensorStack: 4
+ - nodeID: 8cf957200005a011
+   sensorStack: 4
+ - nodeID: 8cf95720000589cc
+   sensorStack: 4
+ - nodeID: 8cf9572000058551
+   sensorStack: 4
+ - nodeID: 8cf957200005a003
+   sensorStack: 4
+ - nodeID: 8cf9572000059e85
+   sensorStack: 4
+ - nodeID: 8cf9572000059fb4
+   sensorStack: 4
+ - nodeID: 47db558000370043
+   sensorStack: 4
+ - nodeID: 47bb5580002c0042
+   sensorStack: 4
+ - nodeID: 472b544e00270044
+   sensorStack: 4
+ - nodeID: 8cf957200005a0d5
+   sensorStack: 4
+ - nodeID: 479b558000230033
+   sensorStack: 4
+ - nodeID: 8cf9572000059ee7
+   sensorStack: 4
+ - nodeID: 472b544e001a0037
+   sensorStack: 4
+ - nodeID: 475a5fe300270019
+   sensorStack: 4
+ - nodeID: 47bb5580002e0020
+   sensorStack: 4
+ - nodeID: 477b41f20047002e
+   sensorStack: 4
+ - nodeID: 475a5fe3002a0019
+   sensorStack: 4
+ - nodeID: 475a5fe3002e0023
+   sensorStack: 4
+ - nodeID: 475a5fe30028001f
+   sensorStack: 4
+ - nodeID: 8cf9572000059e7e
+   sensorStack: 4
+ - nodeID: 471a55800038004e
+   sensorStack: 4
+ - nodeID: 475a5fe3002c0020
+   sensorStack: 4
+ - nodeID: 475a5fe3002e0036
+   sensorStack: 4
+ - nodeID: 8cf9572000059fcd
+   sensorStack: 4
+ - nodeID: 477b41f2004c002a
+   sensorStack: 4
+ - nodeID: 477b41f200290024
+   sensorStack: 4
+ - nodeID: 475a5fe30039002a
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: a0000000000
+   sensorStack: 4
+ - nodeID: 8cf9572000059e81
+   sensorStack: 4
+
+wholeStack:
+    - "BME280"
+    - "IPS7100"
+    - "GPGGALR"
+    - "MGS001"
+    - "SCD30"
+    - "INA219Duo"
+    - "PM"
+    
+liveStack:
+    - "BME280"
+    - "GPSGPGGA2"
+    - "OPCN2"
+    - "OPCN3"
+
+csvStack_A:
+    - "Latitude"                             
+    - "Longitude" 
+    - "Altitude" 
+    - "Bin0"                             
+    - "Bin1"                             
+    - "Bin2"                             
+    - "Bin3"                             
+    - "Bin4"                             
+    - "Bin5"                             
+    - "Bin6"                             
+    - "Bin7"                             
+    - "Bin8"                             
+    - "Bin9"                             
+    - "Bin10"                            
+    - "Bin11"                            
+    - "Bin12"                            
+    - "Bin13"                            
+    - "Bin14"                            
+    - "Bin15"                            
+    - "PM1"                                   
+    - "PM2_5"    
+    - "PM4"                                 
+    - "PM10" 
+    - "Temperature"                                   
+    - "Pressure"    
+    - "Humidity"                                 
+    - "DewPoint" 
+
+csvStack_B:
+    - "Latitude"                             
+    - "Longitude" 
+    - "Altitude" 
+    - "Bin0"                             
+    - "Bin1"                             
+    - "Bin2"                             
+    - "Bin3"                             
+    - "Bin4"                             
+    - "Bin5"                             
+    - "Bin6"                             
+    - "Bin7"                             
+    - "Bin8"                             
+    - "Bin9"                             
+    - "Bin10"                            
+    - "Bin11"                            
+    - "Bin12"                            
+    - "Bin13"                            
+    - "Bin14"                            
+    - "Bin15"      
+    - "Bin16"                            
+    - "Bin17"                            
+    - "Bin18"                            
+    - "Bin19"                            
+    - "Bin20"                            
+    - "Bin21"  
+    - "Bin22"                            
+    - "Bin23"                            
+    - "PM1"                                   
+    - "PM2_5"    
+    - "PM4"                                 
+    - "PM10" 
+    - "Temperature"                                   
+    - "Pressure"    
+    - "Humidity"                                 
+    - "DewPoint" 
+
+targets:
+    - "temperature_airmarK"
+    - "pressure_airmarMBLog"
+    - "humidity_airmar"
+    - "dewPoint_airmarK"
+    - "pm1_palas"
+    - "pm2_5_palas"  
+    - "pm4_palas"    
+    - "pm10_palas"   
+            
+targetLabels:
+    - "Temperature"
+    - "Pressure"
+    - "Humidity"               
+    - "Dew Point"
+    - "PM_{1}"
+    - "PM_{2.5}"
+    - "PM_{4}"     
+    - "PM_{10}" 
+
+units :
+   - "K"
+   - "log(mili Bars)"
+   - "%"
+   - "K"
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+
+instruments :
+   - "Airmar WS"
+   - "Airmar WS"
+   - "Airmar WS"
+   - "Airmar WS"
+   - "Palas Spectrometor"
+   - "Palas Spectrometor"
+   - "Palas Spectrometor"
+   - "Palas Spectrometor"
+
+limitsLow:
+    - 0
+    - 2.9883
+    - 0
+    - -20
+    - 0
+    - 0
+    - 0
+    - 0
+
+limitsHigh:
+    - 120
+    - 3.0032
+    - 100
+    - 100
+    - 20
+    - 40
+    - 50
+    - 60
+
+sensorStack_A:
+    - "BME280"
+    - "OPCN2"
+    - "GPSGPGGA2"
+    
+climateStack_A: 
+    - "BME280_temperature"
+    - "BME280_pressure"
+    - "BME280_humidity"
+
+climateStackCorrected_A: 
+    - "BME280_temperatureK"
+    - "BME280_pressureLog"
+    - "BME280_humidity"
+
+climateStackLabels_A: 
+    - "Temperature"
+    - "Pressure"
+    - "Humidity"
+
+pmStack_A: 
+    - "OPCN2_binCount0"
+    - "OPCN2_binCount1"
+    - "OPCN2_binCount2"
+    - "OPCN2_binCount3"
+    - "OPCN2_binCount4"
+    - "OPCN2_binCount5"
+    - "OPCN2_binCount6"
+    - "OPCN2_binCount7"
+    - "OPCN2_binCount8"
+    - "OPCN2_binCount9"
+    - "OPCN2_binCount10"
+    - "OPCN2_binCount11"
+    - "OPCN2_binCount12"
+    - "OPCN2_binCount13"
+    - "OPCN2_binCount14"
+    - "OPCN2_binCount15"
+    - "OPCN2_pm1"                    
+    - "OPCN2_pm2_5"                  
+    - "OPCN2_pm10"     
+  
+
+
+
+climateInputsCalib_A: 
+    - "temperatureCalib"
+    - "pressureCalib"
+    - "humidityCalib"
+
+climateInputsCalib_B: 
+    - "temperatureCalib"
+    - "pressureCalib"
+    - "humidityCalib"
+
+
+
+
+pmInputsCorrected_A: 
+    - "OPCN2_binCount0Log"
+    - "OPCN2_binCount1Log"
+    - "OPCN2_binCount2Log"
+    - "OPCN2_binCount3Log"
+    - "OPCN2_binCount4Log"
+    - "OPCN2_binCount5Log"
+    - "OPCN2_binCount6Log"
+    - "OPCN2_binCount7Log"
+    - "OPCN2_binCount8Log"
+    - "OPCN2_binCount9Log"
+    - "OPCN2_binCount10Log"
+    - "OPCN2_binCount11Log"
+    - "OPCN2_binCount12Log"
+    - "OPCN2_binCount13Log"
+    - "OPCN2_binCount14Log"
+    - "OPCN2_binCount15Log"
+ 
+
+
+pmInputsCorrected_B: 
+    - "OPCN3_binCount0Log"
+    - "OPCN3_binCount1Log"
+    - "OPCN3_binCount2Log"
+    - "OPCN3_binCount3Log"
+    - "OPCN3_binCount4Log"
+    - "OPCN3_binCount5Log"
+    - "OPCN3_binCount6Log"
+    - "OPCN3_binCount7Log"
+    - "OPCN3_binCount8Log"
+    - "OPCN3_binCount9Log"
+    - "OPCN3_binCount10Log"
+    - "OPCN3_binCount11Log"
+    - "OPCN3_binCount12Log"
+    - "OPCN3_binCount13Log"
+    - "OPCN3_binCount14Log"
+    - "OPCN3_binCount15Log"
+    - "OPCN3_binCount16Log"
+    - "OPCN3_binCount17Log"
+    - "OPCN3_binCount18Log"
+    - "OPCN3_binCount19Log"
+    - "OPCN3_binCount20Log"
+    - "OPCN3_binCount21Log"
+    - "OPCN3_binCount22Log"
+    - "OPCN3_binCount23Log"
+
+pmAppends_A:
+    - "temperature_airmar"
+    - "pressure_airmar"
+    - "humidity_airmar"
+
+pmAppendsCalib_A:
+    - "temperatureCalib"
+    - "pressureCalib"
+    - "humidityCalib"
+
+pmAppendsCalib_B:
+    - "temperatureCalib"
+    - "pressureCalib"
+    - "humidityCalib"
+
+pmAppendsReal_A: 
+    - "temperature_airmarK"
+    - "pressure_airmarMBLog"
+    - "humidity_airmar"
+
+pmAppendsReal_B: 
+    - "temperature_airmarK"
+    - "pressure_airmarMBLog"
+    - "humidity_airmar"
+
+
+pmStackLabels_A:
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                            
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"   
+
+pmAppendLabels_A:
+    - "Temperature"
+    - "Pressure"
+    - "Humidity"
+
+sensorStack_B:
+    - "BME280"
+    - "OPCN3"
+    - "GPSGPGGA2"
+    
+climateStack_B: 
+    - "BME280_temperature"
+    - "BME280_pressure"
+    - "BME280_humidity"
+
+climateStackLabels_B: 
+    - "BME280 Temperature"
+    - "BME280 Pressure"
+    - "BME280 Humidity"
+
+
+pmStack_B: 
+    - "OPCN3_binCount0Log"
+    - "OPCN3_binCount1Log"
+    - "OPCN3_binCount2Log"
+    - "OPCN3_binCount3Log"
+    - "OPCN3_binCount4Log"
+    - "OPCN3_binCount5Log"
+    - "OPCN3_binCount6Log"
+    - "OPCN3_binCount7Log"
+    - "OPCN3_binCount8Log"
+    - "OPCN3_binCount9Log"
+    - "OPCN3_binCount10Log"
+    - "OPCN3_binCount11Log"
+    - "OPCN3_binCount12Log"
+    - "OPCN3_binCount13Log"
+    - "OPCN3_binCount14Log"
+    - "OPCN3_binCount15Log"
+    - "OPCN3_binCount16Log"
+    - "OPCN3_binCount17Log"
+    - "OPCN3_binCount18Log"
+    - "OPCN3_binCount19Log"
+    - "OPCN3_binCount20Log"
+    - "OPCN3_binCount21Log"
+    - "OPCN3_binCount22Log"
+    - "OPCN3_binCount23Log"
+    - "OPCN3_pm1"                    
+    - "OPCN3_pm2_5"                  
+    - "OPCN3_pm10"    
+
+pmStack_B: 
+    - "OPCN3_binCount0"
+    - "OPCN3_binCount1"
+    - "OPCN3_binCount2"
+    - "OPCN3_binCount3"
+    - "OPCN3_binCount4"
+    - "OPCN3_binCount5"
+    - "OPCN3_binCount6"
+    - "OPCN3_binCount7"
+    - "OPCN3_binCount8"
+    - "OPCN3_binCount9"
+    - "OPCN3_binCount10"
+    - "OPCN3_binCount11"
+    - "OPCN3_binCount12"
+    - "OPCN3_binCount13"
+    - "OPCN3_binCount14"
+    - "OPCN3_binCount15"
+    - "OPCN3_binCount16"
+    - "OPCN3_binCount17"
+    - "OPCN3_binCount18"
+    - "OPCN3_binCount19"
+    - "OPCN3_binCount20"
+    - "OPCN3_binCount21"
+    - "OPCN3_binCount22"
+    - "OPCN3_binCount23"
+    - "OPCN3_pm1"                    
+    - "OPCN3_pm2_5"                  
+    - "OPCN3_pm10"    
+                  
+
+pmAppends_B:
+    - "temperature_airmar"
+    - "pressure_airmar"
+    - "humidity_airmar"
+
+
+pmStackLabels_B:
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15" 
+    - "Bin 16"                            
+    - "Bin 17"                            
+    - "Bin 18"                            
+    - "Bin 19"                            
+    - "Bin 20"                            
+    - "Bin 21"  
+    - "Bin 22"                            
+    - "Bin 23"                            
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"  
+ 
+
+pmAppendLabels_B:
+    - "Temperature"
+    - "Pressure"
+    - "Humidity"
+
+pmTargets:
+    - "pm1_palas"
+    - "pm2_5_palas"  
+    - "pm4_palas"    
+    - "pm10_palas"   
+
+pmTargetLabels:
+    - "PM_{1}"
+    - "PM_{2.5}"
+    - "PM_{4}"     
+    - "PM_{10}" 
+
+pmUnits :
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+   - "\\mug/m^{3}"
+
+climateTargets:
+    - "temperature_airmarK"
+    - "pressure_airmarMBLog"
+    - "humidity_airmar"
+    - "dewPoint_airmarK"
+            
+climateTargetLabels:
+    - "Temperature"         
+    - "Pressure"
+    - "Humidity"   
+    - "Dew Point"
+    
+climateUnits:
+   - "K^{o}"
+   - "log(Mili Bars)"
+   - "'%"
+   - "K^{o}"
+   
+climateInstrument: "Airmar WS"
+pmInstrument: "Palas Spectrometor"
+
+
+climateLimitsLow:
+    - 00
+    - 0.98
+    - 20
+    - 10
+
+climateLimitsHigh:
+    - 110
+    - 0.995
+    - 75
+    - 25
+
+
+
+
+
+sensorStack1:
+    - "AS7262" 
+    - "BME280"
+    - "GPSGPGGA2"
+    - "GPSGPRMC2"
+    - "MGS001"
+    - "OPCN2"
+    - "SKYCAM2"
+    - "TSL2591"
+    - "VEML6075"
+
+inputStack1:
+    - "AS7262" 
+    - "BME280"
+    - "GPSGPGGA2"
+    - "GPSGPRMC2"
+    - "MGS001"
+    - "OPCN2"
+    - "SKYCAM_002"
+    - "TSL2591"
+    - "VEML6075"
+
+mintsInputsStack1:
+    - "temperature_mintsDataBME280"
+    - "pressure"                              
+    - "humidity"              
+    - "nh3"                                   
+    - "co"                                    
+    - "no2"                                   
+    - "c3h8"                                  
+    - "c4h10"                                 
+    - "ch4"                                   
+    - "h2"                                    
+    - "c2h5oh"                                
+    - "binCount0"                             
+    - "binCount1"                             
+    - "binCount2"                             
+    - "binCount3"                             
+    - "binCount4"                             
+    - "binCount5"                             
+    - "binCount6"                             
+    - "binCount7"                             
+    - "binCount8"                             
+    - "binCount9"                             
+    - "binCount10"                            
+    - "binCount11"                            
+    - "binCount12"                            
+    - "binCount13"                            
+    - "binCount14"                            
+    - "binCount15"                            
+    - "bin1TimeToCross"                       
+    - "bin3TimeToCross"                       
+    - "bin5TimeToCross"                       
+    - "bin7TimeToCross"                       
+    - "sampleFlowRate"                        
+    - "pm1"                                   
+    - "pm2_5"                                 
+    - "pm10"                                  
+
+mintsInputLabelsStack1:
+    - "Temperature BME280"
+    - "Pressure BME 280"                              
+    - "Humidity BME280"              
+    - "NH_{3}"                                   
+    - "CO"                                    
+    - "NO_{2}"                                   
+    - "C_{3}H_{8}"                                  
+    - "C_{4}H_{10}"                                 
+    - "CH_{4}"                                   
+    - "H_{2}"                                    
+    - "C_{2}H_{5}OH"                                
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                            
+    - "Bin 1 Time to Cross"                       
+    - "Bin 3 Time to Cross"                       
+    - "Bin 5 Time to Cross"                       
+    - "Bin 7 Time to Cross"                       
+    - "Sample Flow Rate"                        
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"                                  
+
+inputStack20:
+    - "AS7262" 
+    - "BME280"
+    - "GPSGPGGA2"
+    - "GPSGPRMC2"
+    - "MGS001"
+    - "OPCN2"
+    - "PPD42NSDuo"
+    - "SCD30"
+    - "SKYCAM_002"
+    - "TSL2591"
+    - "VEML6075"
+
+mintsInputsStack20:
+    - "humidity_mintsDataBME280"              
+    - "nh3"                                   
+    - "co"                                    
+    - "no2"                                   
+    - "c3h8"                                  
+    - "c4h10"                                 
+    - "ch4"                                   
+    - "h2"                                    
+    - "c2h5oh"                                
+    - "binCount0"                             
+    - "binCount1"                             
+    - "binCount2"                             
+    - "binCount3"                             
+    - "binCount4"                             
+    - "binCount5"                             
+    - "binCount6"                             
+    - "binCount7"                             
+    - "binCount8"                             
+    - "binCount9"                             
+    - "binCount10"                            
+    - "binCount11"                            
+    - "binCount12"                            
+    - "binCount13"                            
+    - "binCount14"                            
+    - "binCount15"                            
+    - "bin1TimeToCross"                       
+    - "bin3TimeToCross"                       
+    - "bin5TimeToCross"                       
+    - "bin7TimeToCross"                       
+    - "sampleFlowRate"                        
+    - "pm1"                                   
+    - "pm2_5"                                 
+    - "pm10"                                  
+
+mintsInputLabelsStack20:
+    - "Humidity BME280"              
+    - "NH_{3}"                                   
+    - "CO"                                    
+    - "NO_{2}"                                   
+    - "C_{3}H_{8}"                                  
+    - "C_{4}H_{10}"                                 
+    - "CH_{4}"                                   
+    - "H_{2}"                                    
+    - "C_{2}H_{5}OH"                                
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                            
+    - "Bin 1 Time to Cross"                       
+    - "Bin 3 Time to Cross"                       
+    - "Bin 5 Time to Cross"                       
+    - "Bin 7 Time to Cross"                       
+    - "Sample Flow Rate"                        
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"   
+
+
+mintsInputsStack21:
+    - "humidity_mintsDataBME280"              
+    - "nh3"                                   
+    - "co"                                    
+    - "no2"                                   
+    - "c3h8"                                  
+    - "c4h10"                                 
+    - "ch4"                                   
+    - "h2"                                    
+    - "c2h5oh"                                
+    - 'LPOPmMid'                              
+    - 'LPOPm10'                               
+    - 'ratioPmMid'                            
+    - 'ratioPm10'                             
+    - 'concentrationPmMid'                    
+    - 'concentrationPm2_5'                    
+    - 'concentrationPm10'                     
+
+mintsInputLabelsStack21:
+    - "Humidity BME280"              
+    - "NH_{3}"                                   
+    - "CO"                                    
+    - "NO_{2}"                                   
+    - "C_{3}H_{8}"                                  
+    - "C_{4}H_{10}"                                 
+    - "CH_{4}"                                   
+    - "H_{2}"                                    
+    - "C_{2}H_{5}OH"                                
+    - 'LPO PM Mid'                              
+    - 'LPO PM_{10}'                               
+    - 'Ratio PM_{Mid}'                            
+    - 'Ratio PM_{10}'                             
+    - 'Concentration PM_{Mid}'                    
+    - 'Concentration PM_{2.5}'                    
+    - 'Concentration PM_{10}'    
+
+
+mintsInputsStack22:
+    - "temperature_mintsDataBME280"
+    - "pressure"                              
+    - "humidity_mintsDataBME280"              
+    - "binCount0"                             
+    - "binCount1"                             
+    - "binCount2"                             
+    - "binCount3"                             
+    - "binCount4"                             
+    - "binCount5"                             
+    - "binCount6"                             
+    - "binCount7"                             
+    - "binCount8"                             
+    - "binCount9"                             
+    - "binCount10"                            
+    - "binCount11"                            
+    - "binCount12"                            
+    - "binCount13"                            
+    - "binCount14"                            
+    - "binCount15"                                          
+    - "pm1"                                   
+    - "pm2_5"                                 
+    - "pm10"                                  
+
+mintsInputLabelsStack22:
+    - "Temperature BME280"
+    - "Pressure BME 280"                              
+    - "Humidity BME280"                                         
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                                                 
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"   
+
+
+
+latestStack1:
+    - "BME280"
+    - "MGS001"
+    - "OPCN2"
+
+inputStack2:
+    - "AS7262" 
+    - "BME280"
+    - "GPSGPGGA2"
+    - "GPSGPRMC2"
+    - "MGS001"
+    - "OPCN2"
+    - "PPD42NSDuo"
+    - "SCD30"
+    - "SKYCAM_002"
+    - "TSL2591"
+    - "VEML6075"
+
+latestStack2:
+    - "BME280"
+    - "MGS001"
+    - "OPCN2"
+    - "SCD30"
+
+
+mintsInputsStack2:
+    - "temperature_mintsDataBME280"
+    - "pressure"                              
+    - "humidity_mintsDataBME280"              
+    - "nh3"                                   
+    - "co"                                    
+    - "no2"                                   
+    - "c3h8"                                  
+    - "c4h10"                                 
+    - "ch4"                                   
+    - "h2"                                    
+    - "c2h5oh"                                
+    - "binCount0"                             
+    - "binCount1"                             
+    - "binCount2"                             
+    - "binCount3"                             
+    - "binCount4"                             
+    - "binCount5"                             
+    - "binCount6"                             
+    - "binCount7"                             
+    - "binCount8"                             
+    - "binCount9"                             
+    - "binCount10"                            
+    - "binCount11"                            
+    - "binCount12"                            
+    - "binCount13"                            
+    - "binCount14"                            
+    - "binCount15"                            
+    - "bin1TimeToCross"                       
+    - "bin3TimeToCross"                       
+    - "bin5TimeToCross"                       
+    - "bin7TimeToCross"                       
+    - "sampleFlowRate"                        
+    - "pm1"                                   
+    - "pm2_5"                                 
+    - "pm10"                                  
+
+mintsInputLabelsStack2:
+    - "Temperature BME280"
+    - "Pressure BME 280"                              
+    - "Humidity BME280"              
+    - "NH_{3}"                                   
+    - "CO"                                    
+    - "NO_{2}"                                   
+    - "C_{3}H_{8}"                                  
+    - "C_{4}H_{10}"                                 
+    - "CH_{4}"                                   
+    - "H_{2}"                                    
+    - "C_{2}H_{5}OH"                                
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                            
+    - "Bin 1 Time to Cross"                       
+    - "Bin 3 Time to Cross"                       
+    - "Bin 5 Time to Cross"                       
+    - "Bin 7 Time to Cross"                       
+    - "Sample Flow Rate"                        
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"   
+
+inputStack3:
+    - "AS7262" 
+    - "BME280"
+    - "GPSGPGGA2"
+    - "GPSGPRMC2"
+    - "MGS001"
+    - "OPCN2"
+    - "SCD30"
+    - "SKYCAM_002"
+    - "TSL2591"
+    - "VEML6075"
+
+latestStack3:
+    - "BME280"
+    - "MGS001"
+    - "OPCN2"
+    - "SCD30"
+
+mintsInputsStack3:
+    - "temperature_mintsDataBME280"
+    - "pressure"                              
+    - "humidity_mintsDataBME280"              
+    - "nh3"                                   
+    - "co"                                    
+    - "no2"                                   
+    - "c3h8"                                  
+    - "c4h10"                                 
+    - "ch4"                                   
+    - "h2"                                    
+    - "c2h5oh"                                
+    - "binCount0"                             
+    - "binCount1"                             
+    - "binCount2"                             
+    - "binCount3"                             
+    - "binCount4"                             
+    - "binCount5"                             
+    - "binCount6"                             
+    - "binCount7"                             
+    - "binCount8"                             
+    - "binCount9"                             
+    - "binCount10"                            
+    - "binCount11"                            
+    - "binCount12"                            
+    - "binCount13"                            
+    - "binCount14"                            
+    - "binCount15"                            
+    - "bin1TimeToCross"                       
+    - "bin3TimeToCross"                       
+    - "bin5TimeToCross"                       
+    - "bin7TimeToCross"                       
+    - "sampleFlowRate"                        
+    - "pm1"                                   
+    - "pm2_5"                                 
+    - "pm10"                                  
+    - "c02"                                   
+    - "temperature_mintsDataSCD30"            
+    - "humidity_mintsDataSCD30"               
+ 
+mintsInputLabelsStack3:
+    - "Temperature BME280"
+    - "Pressure BME 280"                              
+    - "Humidity BME280"              
+    - "NH_{3}"                                   
+    - "CO"                                    
+    - "NO_{2}"                                   
+    - "C_{3}H_{8}"                                  
+    - "C_{4}H_{10}"                                 
+    - "CH_{4}"                                   
+    - "H_{2}"                                    
+    - "C_{2}H_{5}OH"                                
+    - "Bin 0"                             
+    - "Bin 1"                             
+    - "Bin 2"                             
+    - "Bin 3"                             
+    - "Bin 4"                             
+    - "Bin 5"                             
+    - "Bin 6"                             
+    - "Bin 7"                             
+    - "Bin 8"                             
+    - "Bin 9"                             
+    - "Bin 10"                            
+    - "Bin 11"                            
+    - "Bin 12"                            
+    - "Bin 13"                            
+    - "Bin 14"                            
+    - "Bin 15"                            
+    - "Bin 1 Time to Cross"                       
+    - "Bin 3 Time to Cross"                       
+    - "Bin 5 Time to Cross"                       
+    - "Bin 7 Time to Cross"                       
+    - "Sample Flow Rate"                        
+    - "PM_{1}"                                   
+    - "PM_{2.5}"                                 
+    - "PM_{10}"                                  
+    - "CO_{2}"                                   
+    - "Temperature SCD30"            
+    - "Humidity SCD30"   
+
+
+
+
