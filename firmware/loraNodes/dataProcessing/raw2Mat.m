@@ -49,6 +49,9 @@ display("Raw Data Located @: "+ dataFolder)
 display("Raw DotMat Data Located @ :"+ rawMatsFolder)
 display(newline)
 
+syncFromCloudLoRaNodes(nodeIDs,dataFolder)
+
+
 for nodeIndex = 1: length(nodeIDs)
     
     nodeID         = nodeIDs{nodeIndex}.nodeID
