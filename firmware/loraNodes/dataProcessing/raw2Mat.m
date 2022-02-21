@@ -40,7 +40,7 @@ nodeIDs        = mintsDefinitions.nodeIDs;
 timeSpan       = seconds(mintsDefinitions.timeSpan);
 
 dataFolder     =  mintsDefinitions.dataFolder;
-rawFolder      =  dataFolder + "/rawMqtt";
+rawFolder      =  dataFolder + "/rawMqttMFS";
 rawMatsFolder  =  dataFolder + "/rawMats";
 
 display(newline)

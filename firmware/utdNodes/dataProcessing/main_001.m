@@ -24,6 +24,6 @@
  
 for n= 1:31 
     
-    raw2MatHPC(n);
+    raw2Mat(n);
 
 end 
